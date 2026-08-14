@@ -1,48 +1,51 @@
-name: 🐛 Laporan Bug (Bug Report)
-description: Buat laporan bug untuk membantu kami memperbaiki masalah pada proyek ini.
-title: 'bug: '
-labels: ['bug', 'triage']
+name: 🐛 Bug Report
+description: Laporkan bug atau perilaku tidak terduga pada create-davingm-nuxt.
+title: "bug: "
+labels: ["bug", "triage"]
 body:
   - type: markdown
     attributes:
       value: |
-        Terima kasih telah membantu meningkatkan kualitas proyek ini! Sebelum membuat laporan, pastikan masalah ini belum pernah dilaporkan sebelumnya di daftar Issues.
+        Terima kasih sudah meluangkan waktu untuk melaporkan bug! 🙏
+        Sebelum melanjutkan, pastikan belum ada laporan serupa di [Issues](https://github.com/davingm/nuxt-davingm/issues).
 
   - type: input
-    id: reproduction
+    id: version
     attributes:
-      label: Minimal Reproduksi (Minimal Reproduction)
-      description: Berikan link repository atau StackBlitz/CodeSandbox yang dapat mengonfirmasi bug ini.
-      placeholder: https://stackblitz.com/...
+      label: Versi create-davingm-nuxt
+      description: Versi berapa yang kamu gunakan? Cek dengan `npm list create-davingm-nuxt` atau lihat di `package.json`.
+      placeholder: "0.1.0"
     validations:
       required: true
 
   - type: textarea
     id: description
     attributes:
-      label: Deskripsi Masalah
-      description: Jelaskan bug secara singkat dan jelas. Apa yang terjadi dan apa yang seharusnya terjadi?
-      placeholder: Jelaskan masalah di sini...
+      label: Deskripsi Bug
+      description: Jelaskan bug secara singkat. Apa yang terjadi vs apa yang seharusnya terjadi?
+      placeholder: |
+        Ketika menjalankan `npx create-davingm-nuxt`, CLI crash setelah memilih template...
     validations:
       required: true
 
   - type: textarea
     id: steps
     attributes:
-      label: Langkah-Langkah Reproduksi
-      description: Sebutkan langkah-langkah presisi untuk memicu bug tersebut.
+      label: Langkah untuk Mereproduksi
+      description: Sebutkan langkah-langkah persis untuk memicu bug ini.
       value: |
-        1. Buka halaman '...'
-        2. Klik pada '...'
-        3. Lihat error '...'
+        1. Jalankan `npx create-davingm-nuxt`
+        2. Pilih template '...'
+        3. Masukkan lokasi project '...'
+        4. Lihat error '...'
     validations:
       required: true
 
   - type: textarea
     id: logs
     attributes:
-      label: Log / Stack Trace Error
-      description: Tempelkan pesan error atau log terminal di sini jika ada.
+      label: Output / Stack Trace Error
+      description: Tempel output terminal atau pesan error di sini.
       render: shell
     validations:
       required: false
@@ -50,12 +53,11 @@ body:
   - type: textarea
     id: environment
     attributes:
-      label: Informasi Lingkungan (Environment)
-      description: Sebutkan versi Node.js, pnpm, OS, browser, dan Nuxt yang digunakan.
+      label: Informasi Environment
       value: |
-        - Operating System: Windows / macOS / Linux
-        - Node.js Version: v20.x
-        - Package Manager: pnpm v9.x
-        - Nuxt Version: v4.x
+        - OS: Windows / macOS / Linux
+        - Node.js: v
+        - Package Manager: npm / pnpm / yarn / bun (versi: )
+        - Shell: bash / zsh / PowerShell / cmd
     validations:
       required: true

@@ -1,13 +1,16 @@
 {
   "name": "create-davingm-nuxt",
   "version": "0.1.0",
-  "description": "My opinionated Nuxt starter project generator",
+  "description": "Opinionated Nuxt starter generator — scaffold project baru dalam hitungan detik",
   "bin": {
     "create-davingm-nuxt": "src/cli.js"
   },
   "files": [
     "src",
-    "template"
+    "templates",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "start": "node src/cli.js"
@@ -15,11 +18,31 @@
   "keywords": [
     "create",
     "nuxt",
+    "nuxt3",
+    "nuxt4",
     "starter",
-    "cli"
+    "boilerplate",
+    "scaffold",
+    "cli",
+    "generator",
+    "template"
   ],
-  "author": "Davingm",
+  "author": {
+    "name": "Davingm",
+    "url": "https://davingm.com"
+  },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davingm/nuxt-davingm.git"
+  },
+  "bugs": {
+    "url": "https://github.com/davingm/nuxt-davingm/issues"
+  },
+  "homepage": "https://github.com/davingm/nuxt-davingm#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "type": "module",
   "dependencies": {
     "@clack/prompts": "^1.7.0",
