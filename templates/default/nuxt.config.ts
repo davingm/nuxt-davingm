@@ -6,6 +6,7 @@ export default defineNuxtConfig({
   devtools: {
     enabled: (globalThis as any).process?.env?.ENABLE_DEVTOOLS === 'true',
   },
+  modules: ['@nuxt/icon'],
   css: ['~/assets/css/tailwind.css'],
   postcss: {
     plugins: {

@@ -1,0 +1,41 @@
+name: 🚀 Permintaan Fitur (Feature Request)
+description: Ajukan ide atau fitur baru untuk meningkatkan proyek ini.
+title: 'feat: '
+labels: ['enhancement']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Punya ide hebat untuk fitur baru? Beri tahu kami latar belakang dan kegunaannya!
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Apakah ide Anda terkait dengan masalah tertentu?
+      description: Berikan deskripsi yang jelas mengenai masalah yang ingin diselesaikan (contoh: "Saya merasa kesulitan ketika...").
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Deskripsi Solusi yang Diinginkan
+      description: Berikan penjelasan yang jelas mengenai fitur atau perbaikan yang Anda usulkan.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatif yang Pernah Dipertimbangkan
+      description: Jelaskan solusi alternatif atau fitur pendukung lain yang pernah Anda pertimbangkan.
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Konteks Tambahan
+      description: Tambahkan tangkapan layar, contoh kode, atau referensi lain terkait permintaan fitur ini.
+    validations:
+      required: false

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-  title: 'Nuxt Davingm Starter',
+  title: 'nuxt-app',
 })
 </script>
 
