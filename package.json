@@ -1,0 +1,27 @@
+{
+  "name": "create-davingm-nuxt",
+  "version": "0.1.0",
+  "description": "My opinionated Nuxt starter project generator",
+  "bin": {
+    "create-davingm-nuxt": "src/cli.js"
+  },
+  "files": [
+    "src",
+    "template"
+  ],
+  "scripts": {
+    "start": "node src/cli.js"
+  },
+  "keywords": [
+    "create",
+    "nuxt",
+    "starter",
+    "cli"
+  ],
+  "author": "Davingm",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@clack/prompts": "^1.7.0"
+  }
+}

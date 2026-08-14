@@ -1,0 +1,53 @@
+# Node dependencies
+node_modules/
+**/node_modules/
+
+# Nuxt & Nitro build outputs
+.nuxt/
+**/.nuxt/
+.output/
+**/.output/
+.nitro/
+**/.nitro/
+.cache/
+**/.cache/
+dist/
+**/dist/
+.data/
+**/.data/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Diagnostic reports
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Coverage
+coverage/
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+# OS & Editor metadata
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary files
+*.tmp
+*.temp

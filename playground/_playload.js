@@ -1,0 +1,1 @@
+const txt = "Never Says Never"
