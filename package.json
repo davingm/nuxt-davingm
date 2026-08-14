@@ -10,7 +10,8 @@
     "templates",
     "README.md",
     "LICENSE",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    ".npmignore"
   ],
   "scripts": {
     "start": "node src/cli.js"

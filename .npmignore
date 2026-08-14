@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+
+# Lock files inside templates (berat, tidak perlu)
+templates/**/pnpm-lock.yaml
+templates/**/package-lock.json
+templates/**/yarn.lock
+templates/**/bun.lockb
+
+# Nuxt build cache inside templates
+templates/**/.nuxt/
+templates/**/.output/
+templates/**/node_modules/
+
+# Internal/dev-only folders in templates
+templates/**/.agents/
+
+# Env files (user generate sendiri)
+templates/**/.env
+
+# Junk/placeholder files
+templates/**/.404
+templates/**/_playload.js
+templates/**/_payload.js
+
+# GitHub Actions folder dari root repo (bukan template)
+.github/
+
+# Dev/config files di root repo
+.devcontainer/
+issues/
+playground/
+.gitignore
+
+# Lockfiles di root repo
+pnpm-lock.yaml
+package-lock.json
