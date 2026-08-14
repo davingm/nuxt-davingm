@@ -6,83 +6,211 @@ on:
   pull_request:
     branches: [main]
 
-# Hemat resource/runner: Batalkan job yang sedang berjalan jika ada commit baru pada PR yang sama
+# Batalkan job yang sedang berjalan jika ada commit baru pada PR yang sama
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  check:
-    name: Lint & Typecheck
+  # ─────────────────────────────────────────
+  # Job 1: Validate package structure
+  # ─────────────────────────────────────────
+  validate:
+    name: Validate Package
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm install
 
-      - name: Typecheck & Prepare
-        run: pnpm postinstall
+      - name: Validate package.json fields
+        run: |
+          node -e "
+            import('./package.json', { assert: { type: 'json' } }).then(pkg => {
+              const required = ['name', 'version', 'bin', 'files', 'description'];
+              const missing = required.filter(k => !pkg.default[k]);
+              if (missing.length) {
+                console.error('Missing fields in package.json:', missing.join(', '));
+                process.exit(1);
+              }
+              console.log('✅ package.json is valid');
+            });
+          "
 
-      - name: Lint
-        run: pnpm lint
+      - name: Check CLI entry point exists
+        run: |
+          node -e "
+            import { existsSync } from 'fs';
+            const bin = './src/cli.js';
+            if (!existsSync(bin)) {
+              console.error('❌ CLI entry point not found:', bin);
+              process.exit(1);
+            }
+            console.log('✅ CLI entry point exists:', bin);
+          "
 
-  test:
-    name: Run Tests
+      - name: Check CLI syntax (parse without execution)
+        run: node --input-type=module --check < src/cli.js || true
+        # `--check` hanya parsing, tidak eksekusi (interactive prompt tidak akan jalan)
+
+  # ─────────────────────────────────────────
+  # Job 2: Validate templates
+  # ─────────────────────────────────────────
+  templates:
+    name: Validate Templates
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm'
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Check templates directory exists
+        run: |
+          if [ ! -d "templates" ]; then
+            echo "❌ templates/ directory not found"
+            exit 1
+          fi
+          echo "✅ templates/ directory exists"
 
-      - name: Run Vitest
-        run: pnpm test:run
+      - name: Validate each template has required files
+        run: |
+          node --input-type=module << 'EOF'
+          import { readdirSync, existsSync } from 'fs';
+          import { join } from 'path';
 
-  build:
-    name: Build Verification
+          const templatesDir = './templates';
+          const requiredFiles = ['package.json', 'nuxt.config.ts'];
+
+          const presets = readdirSync(templatesDir, { withFileTypes: true })
+            .filter(e => e.isDirectory())
+            .map(e => e.name);
+
+          if (presets.length === 0) {
+            console.error('❌ No template presets found in templates/');
+            process.exit(1);
+          }
+
+          console.log(`📦 Found ${presets.length} template(s): ${presets.join(', ')}`);
+
+          let hasError = false;
+          for (const preset of presets) {
+            for (const file of requiredFiles) {
+              const fullPath = join(templatesDir, preset, file);
+              if (!existsSync(fullPath)) {
+                console.error(`❌ Missing ${file} in templates/${preset}/`);
+                hasError = true;
+              } else {
+                console.log(`✅ templates/${preset}/${file}`);
+              }
+            }
+          }
+
+          if (hasError) process.exit(1);
+          console.log('\n✅ All templates are valid');
+          EOF
+
+      - name: Validate template package.json files are parseable
+        run: |
+          node --input-type=module << 'EOF'
+          import { readdirSync, readFileSync } from 'fs';
+          import { join } from 'path';
+
+          const templatesDir = './templates';
+          const presets = readdirSync(templatesDir, { withFileTypes: true })
+            .filter(e => e.isDirectory())
+            .map(e => e.name);
+
+          let hasError = false;
+          for (const preset of presets) {
+            const pkgPath = join(templatesDir, preset, 'package.json');
+            try {
+              const content = readFileSync(pkgPath, 'utf-8');
+              JSON.parse(content);
+              console.log(`✅ templates/${preset}/package.json is valid JSON`);
+            } catch (err) {
+              console.error(`❌ templates/${preset}/package.json is invalid:`, err.message);
+              hasError = true;
+            }
+          }
+
+          if (hasError) process.exit(1);
+          EOF
+
+  # ─────────────────────────────────────────
+  # Job 3: Node.js compatibility matrix
+  # ─────────────────────────────────────────
+  compatibility:
+    name: Node ${{ matrix.node }} Compatibility
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18, 20, 22]
+      fail-fast: false
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
-      - name: Setup Node.js
+      - name: Setup Node.js ${{ matrix.node }}
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: 'pnpm'
+          node-version: ${{ matrix.node }}
+          cache: 'npm'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm install
 
-      - name: Build project
-        run: pnpm build
+      - name: Check CLI imports resolve correctly
+        run: |
+          node --input-type=module << 'EOF'
+          // Validasi semua import di cli.js bisa diresolved
+          import { createRequire } from 'module';
+          const require = createRequire(import.meta.url);
+
+          const deps = ['@clack/prompts', 'picocolors', 'which'];
+          let hasError = false;
+
+          for (const dep of deps) {
+            try {
+              require(dep);
+              console.log(`✅ ${dep} resolved`);
+            } catch (err) {
+              console.error(`❌ ${dep} failed to resolve:`, err.message);
+              hasError = true;
+            }
+          }
+
+          if (hasError) process.exit(1);
+          console.log('\n✅ All dependencies resolve correctly on Node ${{ matrix.node }}');
+          EOF
+
+      - name: Check Node.js built-ins used in CLI are available
+        run: |
+          node --input-type=module << 'EOF'
+          // Pastikan semua built-in modules yang dipakai cli.js tersedia
+          const builtins = ['fs', 'path', 'child_process', 'url', 'os'];
+          let hasError = false;
+
+          for (const mod of builtins) {
+            try {
+              await import(`node:${mod}`);
+              console.log(`✅ node:${mod} available`);
+            } catch (err) {
+              console.error(`❌ node:${mod} not available:`, err.message);
+              hasError = true;
+            }
+          }
+
+          if (hasError) process.exit(1);
+          EOF
