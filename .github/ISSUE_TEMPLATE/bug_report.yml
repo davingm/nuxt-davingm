@@ -1,0 +1,61 @@
+name: 🐛 Laporan Bug (Bug Report)
+description: Buat laporan bug untuk membantu kami memperbaiki masalah pada proyek ini.
+title: 'bug: '
+labels: ['bug', 'triage']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Terima kasih telah membantu meningkatkan kualitas proyek ini! Sebelum membuat laporan, pastikan masalah ini belum pernah dilaporkan sebelumnya di daftar Issues.
+
+  - type: input
+    id: reproduction
+    attributes:
+      label: Minimal Reproduksi (Minimal Reproduction)
+      description: Berikan link repository atau StackBlitz/CodeSandbox yang dapat mengonfirmasi bug ini.
+      placeholder: https://stackblitz.com/...
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Deskripsi Masalah
+      description: Jelaskan bug secara singkat dan jelas. Apa yang terjadi dan apa yang seharusnya terjadi?
+      placeholder: Jelaskan masalah di sini...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Langkah-Langkah Reproduksi
+      description: Sebutkan langkah-langkah presisi untuk memicu bug tersebut.
+      value: |
+        1. Buka halaman '...'
+        2. Klik pada '...'
+        3. Lihat error '...'
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Log / Stack Trace Error
+      description: Tempelkan pesan error atau log terminal di sini jika ada.
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Informasi Lingkungan (Environment)
+      description: Sebutkan versi Node.js, pnpm, OS, browser, dan Nuxt yang digunakan.
+      value: |
+        - Operating System: Windows / macOS / Linux
+        - Node.js Version: v20.x
+        - Package Manager: pnpm v9.x
+        - Nuxt Version: v4.x
+    validations:
+      required: true
