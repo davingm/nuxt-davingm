@@ -11,6 +11,12 @@ importers:
       '@clack/prompts':
         specifier: ^1.7.0
         version: 1.7.0
+      picocolors:
+        specifier: ^1.1.1
+        version: 1.1.1
+      which:
+        specifier: ^7.0.0
+        version: 7.0.0
 
 packages:
 
@@ -31,8 +37,20 @@ packages:
   fast-wrap-ansi@0.2.2:
     resolution: {integrity: sha512-7F2Fl+TjRSenLqlU3UjSH0iyqopqoZIu7eZVpEirP2g1GtWa2G/ecEmBdgz31+Mxr+ELclgg6sokpSFIQiZ02Q==}
 
+  isexe@4.0.0:
+    resolution: {integrity: sha512-FFUtZMpoZ8RqHS3XeXEmHWLA4thH+ZxCv2lOiPIn1Xc7CxrqhWzNSDzD+/chS/zbYezmiwWLdQC09JdQKmthOw==}
+    engines: {node: '>=20'}
+
+  picocolors@1.1.1:
+    resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
+
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
+
+  which@7.0.0:
+    resolution: {integrity: sha512-RancgH2dmbLdHl6LRhEqvklWMgl/Hdnun0Y90KhBOLkMefg8Qa7/Zel8Sm+8HEcP6DEjzsWzpkuBQEZok58isA==}
+    engines: {node: ^22.22.2 || ^24.15.0 || >=26.0.0}
+    hasBin: true
 
 snapshots:
 
@@ -58,4 +76,12 @@ snapshots:
     dependencies:
       fast-string-width: 3.0.2
 
+  isexe@4.0.0: {}
+
+  picocolors@1.1.1: {}
+
   sisteransi@1.0.5: {}
+
+  which@7.0.0:
+    dependencies:
+      isexe: 4.0.0
