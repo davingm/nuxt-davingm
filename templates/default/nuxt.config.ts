@@ -6,7 +6,13 @@ export default defineNuxtConfig({
   devtools: {
     enabled: (globalThis as any).process?.env?.ENABLE_DEVTOOLS === 'true',
   },
-  css: ['~/app/assets/css/tailwind.css'],
+  css: ['~/assets/css/tailwind.css'],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
   runtimeConfig: {
     public: {
       apiBase: '',

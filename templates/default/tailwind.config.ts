@@ -1,7 +1,7 @@
-import { defineConfig } from 'tailwindcss'
+import type { Config } from 'tailwindcss'
 import forms from '@tailwindcss/forms'
 
-export default defineConfig({
+export default {
   content: [
     './app/**/*.{vue,js,ts,jsx,tsx}',
     './components/**/*.{vue,js,ts,jsx,tsx}',
@@ -11,4 +11,4 @@ export default defineConfig({
     extend: {}
   },
   plugins: [forms]
-})
+} satisfies Config
