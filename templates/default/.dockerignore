@@ -1,0 +1,11 @@
+node_modules
+.git
+.env
+.env.*
+dist
+.output
+.cache
+coverage
+pnpm-store
+**/__tests__
+**/*.local

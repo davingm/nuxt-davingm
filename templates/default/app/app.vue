@@ -1,6 +1,11 @@
+<script setup lang="ts">
+useHead({
+  title: 'Nuxt Davingm Starter',
+})
+</script>
+
 <template>
-  <div>
-    <NuxtRouteAnnouncer />
-    <NuxtWelcome />
-  </div>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
