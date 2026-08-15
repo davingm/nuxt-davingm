@@ -43,7 +43,7 @@
   "bugs": {
     "url": "https://github.com/davingm/nuxt-davingm/issues"
   },
-  "homepage": "https://github.com/davingm/nuxt-davingm#readme",
+  "homepage": "https://nuxt.davingm.com",
   "engines": {
     "node": ">=18.0.0"
   },
