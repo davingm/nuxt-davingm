@@ -1,0 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ─── Light Mode — Soft Cream (from tailwind.css) ─── */
+:root {
+  /* VitePress color tokens */
+  --vp-c-bg:           #fbf9f5;
+  --vp-c-bg-soft:      #f1ebd9;
+  --vp-c-bg-mute:      #e6e0d4;
+  --vp-c-bg-alt:       #f3ede2;
+
+  --vp-c-text-1:       #181715;
+  --vp-c-text-2:       #524d46;
+  --vp-c-text-3:       #7a7268;
+
+  --vp-c-divider:      #e6e0d4;
+  --vp-c-border:       #e6e0d4;
+  --vp-c-gutter:       #e6e0d4;
+
+  /* Brand — sama dengan accent template (hitam/putih sesuai mode) */
+  --vp-c-brand-1:      #181715;
+  --vp-c-brand-2:      #524d46;
+  --vp-c-brand-3:      #7a7268;
+  --vp-c-brand-soft:   #eee7d8;
+
+  /* Buttons */
+  --vp-button-brand-bg:          #181715;
+  --vp-button-brand-hover-bg:    #2e2c28;
+  --vp-button-brand-active-bg:   #181715;
+  --vp-button-brand-border:      #181715;
+  --vp-button-brand-hover-border:#2e2c28;
+  --vp-button-brand-text:        #fbf9f5;
+  --vp-button-brand-hover-text:  #fbf9f5;
+
+  --vp-button-alt-bg:            #ffffff;
+  --vp-button-alt-hover-bg:      #f1ebd9;
+  --vp-button-alt-border:        #e6e0d4;
+  --vp-button-alt-hover-border:  #181715;
+  --vp-button-alt-text:          #181715;
+
+  /* Nav / sidebar */
+  --vp-nav-bg-color:             #fbf9f5;
+  --vp-sidebar-bg-color:         #fbf9f5;
+  --vp-local-nav-bg-color:       #f3ede2;
+
+  /* Code block */
+  --vp-code-bg:                  #f1ebd9;
+  --vp-code-color:                #181715;
+  --vp-code-block-bg:            #f1ebd9;
+  --vp-code-copy-code-bg:        #e6e0d4;
+  --vp-code-copy-code-hover-bg:  #d4cbb8;
+  --vp-code-line-highlight-color: rgba(24, 23, 21, 0.06);
+
+  /* Custom properties */
+  --vp-shadow-1: rgba(24, 23, 21, 0.06) 0 12px 28px -6px, rgba(24, 23, 21, 0.03) 0 4px 12px -2px;
+  --vp-shadow-2: rgba(24, 23, 21, 0.10) 0 16px 32px -8px;
+
+  /* Typography — Poppins */
+  --vp-font-family-base: 'Poppins', system-ui, -apple-system, sans-serif;
+  --vp-font-family-mono: ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+
+/* ─── Dark Mode — Pitch Black (from tailwind.css) ─── */
+.dark {
+  --vp-c-bg:           #000000;
+  --vp-c-bg-soft:      #0a0a0a;
+  --vp-c-bg-mute:      #121212;
+  --vp-c-bg-alt:       #0a0a0a;
+
+  --vp-c-text-1:       #ffffff;
+  --vp-c-text-2:       #a1a1aa;
+  --vp-c-text-3:       #71717a;
+
+  --vp-c-divider:      #262626;
+  --vp-c-border:       #262626;
+  --vp-c-gutter:       #1a1a1a;
+
+  /* Brand */
+  --vp-c-brand-1:      #ffffff;
+  --vp-c-brand-2:      #a1a1aa;
+  --vp-c-brand-3:      #71717a;
+  --vp-c-brand-soft:   #1a1a1a;
+
+  /* Buttons */
+  --vp-button-brand-bg:          #ffffff;
+  --vp-button-brand-hover-bg:    #e5e5e5;
+  --vp-button-brand-active-bg:   #ffffff;
+  --vp-button-brand-border:      #ffffff;
+  --vp-button-brand-hover-border:#e5e5e5;
+  --vp-button-brand-text:        #000000;
+  --vp-button-brand-hover-text:  #000000;
+
+  --vp-button-alt-bg:            #0a0a0a;
+  --vp-button-alt-hover-bg:      #1a1a1a;
+  --vp-button-alt-border:        #262626;
+  --vp-button-alt-hover-border:  #ffffff;
+  --vp-button-alt-text:          #ffffff;
+
+  /* Nav / sidebar */
+  --vp-nav-bg-color:             #000000;
+  --vp-sidebar-bg-color:         #000000;
+  --vp-local-nav-bg-color:       #0a0a0a;
+
+  /* Code block */
+  --vp-code-bg:                  #121212;
+  --vp-code-color:                #e5e5e5;
+  --vp-code-block-bg:            #0a0a0a;
+  --vp-code-copy-code-bg:        #1a1a1a;
+  --vp-code-copy-code-hover-bg:  #262626;
+  --vp-code-line-highlight-color: rgba(255, 255, 255, 0.05);
+
+  /* Custom properties */
+  --vp-shadow-1: rgba(0, 0, 0, 0.8) 0 12px 28px -6px;
+  --vp-shadow-2: rgba(0, 0, 0, 0.9) 0 16px 32px -8px;
+}
+
+/* ─── Global Overrides ─── */
+
+/* Fonts */
+body,
+.VPDoc,
+.VPNav,
+.VPSidebar {
+  font-family: var(--vp-font-family-base) !important;
+}
+
+/* Nav — border bawah seperti template */
+.VPNav {
+  border-bottom: 1px solid var(--vp-c-divider) !important;
+  background: var(--vp-nav-bg-color) !important;
+  backdrop-filter: blur(12px);
+}
+
+/* Sidebar */
+.VPSidebar {
+  background: var(--vp-sidebar-bg-color) !important;
+  border-right: 1px solid var(--vp-c-divider) !important;
+}
+
+/* Konten utama */
+.VPDoc .content-container {
+  background: var(--vp-c-bg);
+}
+
+/* Hero section */
+.VPHero .name {
+  color: var(--vp-c-text-1) !important;
+  font-family: var(--vp-font-family-base) !important;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.VPHero .text {
+  color: var(--vp-c-text-2) !important;
+  font-family: var(--vp-font-family-base) !important;
+}
+
+.VPHero .tagline {
+  color: var(--vp-c-text-2) !important;
+  font-family: var(--vp-font-family-base) !important;
+}
+
+/* Feature cards — pakai gaya card template */
+.VPFeature {
+  background: var(--vp-c-bg-alt) !important;
+  border: 1px solid var(--vp-c-divider) !important;
+  border-radius: 12px !important;
+  transition: all 0.2s ease !important;
+}
+
+.VPFeature:hover {
+  border-color: var(--vp-c-text-1) !important;
+  transform: translateY(-2px);
+  box-shadow: var(--vp-shadow-1) !important;
+}
+
+.VPFeature .title {
+  color: var(--vp-c-text-1) !important;
+  font-family: var(--vp-font-family-base) !important;
+  font-weight: 600;
+}
+
+.VPFeature .details {
+  color: var(--vp-c-text-2) !important;
+}
+
+/* Code inline — hanya yang bukan di dalam code block */
+:not(div[class*='language-']) > code,
+:not(pre) > code {
+  background: var(--vp-code-bg) !important;
+  border: 1px solid var(--vp-c-divider) !important;
+  border-radius: 6px;
+  color: var(--vp-c-text-1) !important;
+  font-family: var(--vp-font-family-mono) !important;
+}
+
+/* Code block — wrapper luar saja yang dapat border */
+div[class*='language-'] {
+  background: var(--vp-code-block-bg) !important;
+  border: 1px solid var(--vp-c-divider) !important;
+  border-radius: 10px !important;
+  overflow: hidden;
+}
+
+/* Hapus border dari elemen dalam code block */
+div[class*='language-'] code,
+div[class*='language-'] pre,
+div[class*='language-'] span {
+  border: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* Headings */
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.vp-doc h4 {
+  font-family: var(--vp-font-family-base) !important;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--vp-c-text-1);
+}
+
+/* Link aktif sidebar */
+.VPSidebarItem.is-active > .item .text {
+  color: var(--vp-c-text-1) !important;
+  font-weight: 600;
+}
+
+/* Scrollbar light */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--vp-c-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--vp-c-divider);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-text-3);
+}
+
+/* Table */
+.vp-doc table {
+  border-collapse: collapse;
+  border: 1px solid var(--vp-c-divider) !important;
+}
+
+.vp-doc th {
+  background: var(--vp-c-bg-soft) !important;
+  color: var(--vp-c-text-1) !important;
+  border: 1px solid var(--vp-c-divider) !important;
+}
+
+.vp-doc td {
+  border: 1px solid var(--vp-c-divider) !important;
+}
+
+/* Tip/Warning/Danger blocks */
+.vp-doc .custom-block {
+  border-radius: 10px;
+}
+
+.vp-doc .custom-block.tip {
+  background: var(--vp-c-bg-soft) !important;
+  border-color: var(--vp-c-divider) !important;
+}

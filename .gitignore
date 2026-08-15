@@ -48,6 +48,10 @@ Thumbs.db
 *.sln
 *.sw?
 
+# VitePress docs build output
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+
 # Temporary files
 *.tmp
 *.temp

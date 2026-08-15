@@ -35,3 +35,6 @@ playground/
 # Lockfiles di root repo
 pnpm-lock.yaml
 package-lock.json
+
+# Docs (website docs, bukan untuk npm publish)
+docs/

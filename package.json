@@ -14,7 +14,10 @@
     ".npmignore"
   ],
   "scripts": {
-    "start": "node src/cli.js"
+    "start": "node src/cli.js",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "keywords": [
     "create",
@@ -49,5 +52,8 @@
     "@clack/prompts": "^1.7.0",
     "picocolors": "^1.1.1",
     "which": "^7.0.0"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.3"
   }
 }
