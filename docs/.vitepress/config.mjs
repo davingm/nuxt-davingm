@@ -6,7 +6,7 @@ export default defineConfig({
   lang: 'id',
 
   // Base URL untuk GitHub Pages — ganti 'nuxt-davingm' jika nama repo berbeda
-  base: '/nuxt-davingm/',
+  base: '/',
 
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
