@@ -1,6 +1,6 @@
 {
   "name": "create-davingm-nuxt",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Opinionated Nuxt starter generator — scaffold project baru dalam hitungan detik",
   "bin": {
     "create-davingm-nuxt": "src/cli.js"
