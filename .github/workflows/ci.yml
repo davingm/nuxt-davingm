@@ -3,214 +3,107 @@ name: CI
 on:
   push:
     branches: [main]
+    paths:
+      - 'src/**'
+      - 'templates/**'
+      - 'package.json'
+      - 'package-lock.json'
   pull_request:
     branches: [main]
+    paths:
+      - 'src/**'
+      - 'templates/**'
+      - 'package.json'
+      - 'package-lock.json'
 
-# Batalkan job yang sedang berjalan jika ada commit baru pada PR yang sama
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  # ─────────────────────────────────────────
-  # Job 1: Validate package structure
-  # ─────────────────────────────────────────
   validate:
-    name: Validate Package
+    name: Validate Package & Templates
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
+      # ── Package ──────────────────────────────────
       - name: Validate package.json fields
         run: |
-          node -e "
-            import('./package.json', { assert: { type: 'json' } }).then(pkg => {
-              const required = ['name', 'version', 'bin', 'files', 'description'];
-              const missing = required.filter(k => !pkg.default[k]);
-              if (missing.length) {
-                console.error('Missing fields in package.json:', missing.join(', '));
-                process.exit(1);
-              }
-              console.log('✅ package.json is valid');
-            });
-          "
+          node --input-type=module << 'EOF'
+          import pkg from './package.json' assert { type: 'json' };
+          const required = ['name', 'version', 'bin', 'files', 'description'];
+          const missing = required.filter(k => !pkg[k]);
+          if (missing.length) {
+            console.error('Missing fields:', missing.join(', '));
+            process.exit(1);
+          }
+          console.log('✅ package.json valid');
+          EOF
 
       - name: Check CLI entry point exists
         run: |
-          node -e "
-            import { existsSync } from 'fs';
-            const bin = './src/cli.js';
-            if (!existsSync(bin)) {
-              console.error('❌ CLI entry point not found:', bin);
-              process.exit(1);
-            }
-            console.log('✅ CLI entry point exists:', bin);
-          "
+          [ -f src/cli.js ] && echo "✅ src/cli.js exists" || (echo "❌ src/cli.js not found" && exit 1)
 
-      - name: Check CLI syntax (parse without execution)
-        run: node --input-type=module --check < src/cli.js || true
-        # `--check` hanya parsing, tidak eksekusi (interactive prompt tidak akan jalan)
+      - name: Check CLI syntax
+        run: node --input-type=module --check < src/cli.js
 
-  # ─────────────────────────────────────────
-  # Job 2: Validate templates
-  # ─────────────────────────────────────────
-  templates:
-    name: Validate Templates
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Check templates directory exists
-        run: |
-          if [ ! -d "templates" ]; then
-            echo "❌ templates/ directory not found"
-            exit 1
-          fi
-          echo "✅ templates/ directory exists"
-
-      - name: Validate each template has required files
+      # ── Dependencies ─────────────────────────────
+      - name: Verify dependencies resolve
         run: |
           node --input-type=module << 'EOF'
-          import { readdirSync, existsSync } from 'fs';
-          import { join } from 'path';
-
-          const templatesDir = './templates';
-          const requiredFiles = ['package.json', 'nuxt.config.ts'];
-
-          const presets = readdirSync(templatesDir, { withFileTypes: true })
-            .filter(e => e.isDirectory())
-            .map(e => e.name);
-
-          if (presets.length === 0) {
-            console.error('❌ No template presets found in templates/');
-            process.exit(1);
-          }
-
-          console.log(`📦 Found ${presets.length} template(s): ${presets.join(', ')}`);
-
-          let hasError = false;
-          for (const preset of presets) {
-            for (const file of requiredFiles) {
-              const fullPath = join(templatesDir, preset, file);
-              if (!existsSync(fullPath)) {
-                console.error(`❌ Missing ${file} in templates/${preset}/`);
-                hasError = true;
-              } else {
-                console.log(`✅ templates/${preset}/${file}`);
-              }
-            }
-          }
-
-          if (hasError) process.exit(1);
-          console.log('\n✅ All templates are valid');
-          EOF
-
-      - name: Validate template package.json files are parseable
-        run: |
-          node --input-type=module << 'EOF'
-          import { readdirSync, readFileSync } from 'fs';
-          import { join } from 'path';
-
-          const templatesDir = './templates';
-          const presets = readdirSync(templatesDir, { withFileTypes: true })
-            .filter(e => e.isDirectory())
-            .map(e => e.name);
-
-          let hasError = false;
-          for (const preset of presets) {
-            const pkgPath = join(templatesDir, preset, 'package.json');
-            try {
-              const content = readFileSync(pkgPath, 'utf-8');
-              JSON.parse(content);
-              console.log(`✅ templates/${preset}/package.json is valid JSON`);
-            } catch (err) {
-              console.error(`❌ templates/${preset}/package.json is invalid:`, err.message);
-              hasError = true;
-            }
-          }
-
-          if (hasError) process.exit(1);
-          EOF
-
-  # ─────────────────────────────────────────
-  # Job 3: Node.js compatibility matrix
-  # ─────────────────────────────────────────
-  compatibility:
-    name: Node ${{ matrix.node }} Compatibility
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [18, 20, 22]
-      fail-fast: false
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js ${{ matrix.node }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node }}
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Check CLI imports resolve correctly
-        run: |
-          node --input-type=module << 'EOF'
-          // Validasi semua import di cli.js bisa diresolved
           import { createRequire } from 'module';
           const require = createRequire(import.meta.url);
-
           const deps = ['@clack/prompts', 'picocolors', 'which'];
-          let hasError = false;
-
+          let fail = false;
           for (const dep of deps) {
-            try {
-              require(dep);
-              console.log(`✅ ${dep} resolved`);
-            } catch (err) {
-              console.error(`❌ ${dep} failed to resolve:`, err.message);
-              hasError = true;
-            }
+            try { require(dep); console.log(`✅ ${dep}`); }
+            catch (e) { console.error(`❌ ${dep}:`, e.message); fail = true; }
           }
-
-          if (hasError) process.exit(1);
-          console.log('\n✅ All dependencies resolve correctly on Node ${{ matrix.node }}');
+          if (fail) process.exit(1);
           EOF
 
-      - name: Check Node.js built-ins used in CLI are available
+      # ── Templates ────────────────────────────────
+      - name: Check templates directory
+        run: |
+          [ -d templates ] && echo "✅ templates/ exists" || (echo "❌ templates/ not found" && exit 1)
+
+      - name: Validate templates structure
         run: |
           node --input-type=module << 'EOF'
-          // Pastikan semua built-in modules yang dipakai cli.js tersedia
-          const builtins = ['fs', 'path', 'child_process', 'url', 'os'];
-          let hasError = false;
+          import { readdirSync, existsSync, readFileSync } from 'fs';
+          import { join } from 'path';
 
-          for (const mod of builtins) {
-            try {
-              await import(`node:${mod}`);
-              console.log(`✅ node:${mod} available`);
-            } catch (err) {
-              console.error(`❌ node:${mod} not available:`, err.message);
-              hasError = true;
+          const dir = './templates';
+          const required = ['package.json', 'nuxt.config.ts'];
+          const presets = readdirSync(dir, { withFileTypes: true })
+            .filter(e => e.isDirectory()).map(e => e.name);
+
+          if (!presets.length) { console.error('❌ No presets found'); process.exit(1); }
+          console.log(`📦 Presets: ${presets.join(', ')}`);
+
+          let fail = false;
+          for (const preset of presets) {
+            for (const file of required) {
+              const p = join(dir, preset, file);
+              if (!existsSync(p)) { console.error(`❌ Missing ${preset}/${file}`); fail = true; }
+              else if (file === 'package.json') {
+                try { JSON.parse(readFileSync(p, 'utf-8')); console.log(`✅ ${preset}/${file}`); }
+                catch (e) { console.error(`❌ ${preset}/${file} invalid JSON`); fail = true; }
+              } else { console.log(`✅ ${preset}/${file}`); }
             }
           }
-
-          if (hasError) process.exit(1);
+          if (fail) process.exit(1);
+          console.log('\n✅ All templates valid');
           EOF

@@ -1,10 +1,12 @@
 import { defineConfig } from 'vitepress'
-import { fileURLToPath, URL } from 'node:url'
 
 export default defineConfig({
   title: 'Nuxt Starter',
   description: 'Opinionated Nuxt starter generator — scaffold project baru dalam hitungan detik.',
   lang: 'id',
+
+  // Base URL untuk GitHub Pages — ganti 'nuxt-davingm' jika nama repo berbeda
+  base: '/nuxt-davingm/',
 
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
