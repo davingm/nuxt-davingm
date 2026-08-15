@@ -5,7 +5,7 @@ export default defineConfig({
   description: 'Opinionated Nuxt starter generator — scaffold project baru dalam hitungan detik.',
   lang: 'id',
 
-  // Base URL untuk GitHub Pages — ganti 'nuxt-davingm' jika nama repo berbeda
+  // Base URL untuk GitHub Pages
   base: '/',
 
   head: [
