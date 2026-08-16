@@ -18,6 +18,15 @@ export default defineNuxtConfig({
     experimental: {
       tasks: true,
     },
+    externals: {
+      // @libsql/client adalah pure ESM, tidak perlu di-bundle oleh Nitro
+      external: ['@libsql/client'],
+    },
+  },
+  vite: {
+    optimizeDeps: {
+      exclude: ['@libsql/client'],
+    },
   },
   runtimeConfig: {
     dbConnection: process.env.DB_CONNECTION || 'sqlite',

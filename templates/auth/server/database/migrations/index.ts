@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import Database from "better-sqlite3";
+import { createClient } from "@libsql/client";
 import { DatabaseSeeder } from "../seeders/DatabaseSeeder";
 
 /**
@@ -35,17 +35,18 @@ export function getDbConfig() {
 	};
 }
 
-function getSqlitePath(database: string): string {
-	return path.isAbsolute(database)
+function getSqliteUrl(database: string): string {
+	if (database === ":memory:") return "file::memory:";
+	const absPath = path.isAbsolute(database)
 		? database
 		: path.resolve(process.cwd(), database);
-}
 
-function ensureDir(filePath: string) {
-	const dir = path.dirname(filePath);
+	const dir = path.dirname(absPath);
 	if (!fs.existsSync(dir)) {
 		fs.mkdirSync(dir, { recursive: true });
 	}
+
+	return `file:${absPath}`;
 }
 
 const CREATE_USERS = `
@@ -56,7 +57,7 @@ const CREATE_USERS = `
     password  TEXT    NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  );
+  )
 `;
 
 const CREATE_SESSIONS = `
@@ -67,13 +68,11 @@ const CREATE_SESSIONS = `
     expires_at DATETIME NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-  );
+  )
 `;
 
-const DROP_ALL = `
-  DROP TABLE IF EXISTS sessions;
-  DROP TABLE IF EXISTS users;
-`;
+const DROP_SESSIONS = "DROP TABLE IF EXISTS sessions";
+const DROP_USERS = "DROP TABLE IF EXISTS users";
 
 /**
  * Jalankan migrasi SQLite.
@@ -91,26 +90,23 @@ export async function runMigrations() {
 		return;
 	}
 
-	const dbPath = getSqlitePath(cfg.database);
-	ensureDir(dbPath);
-
-	const db = new Database(dbPath);
-	db.pragma("journal_mode = WAL");
-	db.pragma("foreign_keys = ON");
+	const db = createClient({ url: getSqliteUrl(cfg.database) });
 
 	try {
 		if (cfg.dbType === "create-drop") {
 			console.log(
 				"[Migration] Mode: create-drop — menghapus dan membuat ulang semua tabel...",
 			);
-			db.exec(DROP_ALL);
+			await db.execute(DROP_SESSIONS);
+			await db.execute(DROP_USERS);
 		} else {
 			console.log(
 				"[Migration] Mode: update — membuat tabel jika belum ada...",
 			);
 		}
 
-		db.exec(CREATE_USERS + CREATE_SESSIONS);
+		await db.execute(CREATE_USERS);
+		await db.execute(CREATE_SESSIONS);
 		console.log("[Migration] Migrasi SQLite selesai.");
 	} finally {
 		db.close();
@@ -132,15 +128,13 @@ export async function freshDatabase(shouldSeed = false) {
 		return;
 	}
 
-	const dbPath = getSqlitePath(cfg.database);
-	ensureDir(dbPath);
-
-	const db = new Database(dbPath);
-	db.pragma("journal_mode = WAL");
+	const db = createClient({ url: getSqliteUrl(cfg.database) });
 
 	try {
-		db.exec(DROP_ALL);
-		db.exec(CREATE_USERS + CREATE_SESSIONS);
+		await db.execute(DROP_SESSIONS);
+		await db.execute(DROP_USERS);
+		await db.execute(CREATE_USERS);
+		await db.execute(CREATE_SESSIONS);
 		console.log("[Database] Reset database selesai.");
 	} finally {
 		db.close();

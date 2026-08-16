@@ -1,5 +1,8 @@
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
+// Driver: @libsql/client (pure JS, tidak perlu compile native)
+// Drizzle ORM tetap pakai sqlite-core karena dialect SQLite sama untuk libsql
+
 /**
  * Schema database untuk SQLite (default driver project ini).
  * Tabel users & sessions digunakan untuk autentikasi berbasis session.

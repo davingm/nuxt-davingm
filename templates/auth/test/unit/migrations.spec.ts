@@ -5,18 +5,16 @@
  * file database development.
  */
 
-import Database from "better-sqlite3";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { createClient, type Client } from "@libsql/client";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 // ─── Helper: buat in-memory DB dan jalankan migrasi manual ───────────────────
 
-function createTestDb() {
-	const db = new Database(":memory:");
-	db.pragma("journal_mode = WAL");
-	db.pragma("foreign_keys = ON");
+async function createTestDb(): Promise<Client> {
+	const db = createClient({ url: "file::memory:" });
 
 	// Skema yang sama dengan migrations/index.ts
-	db.exec(`
+	await db.execute(`
     CREATE TABLE IF NOT EXISTS users (
       id        INTEGER PRIMARY KEY AUTOINCREMENT,
       name      TEXT    NOT NULL,
@@ -24,7 +22,9 @@ function createTestDb() {
       password  TEXT    NOT NULL,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    );
+    )
+  `);
+	await db.execute(`
     CREATE TABLE IF NOT EXISTS sessions (
       id         TEXT     PRIMARY KEY,
       user_id    INTEGER  NOT NULL,
@@ -32,7 +32,7 @@ function createTestDb() {
       expires_at DATETIME NOT NULL,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-    );
+    )
   `);
 
 	return db;
@@ -41,37 +41,33 @@ function createTestDb() {
 // ─── Tests ────────────────────────────────────────────────────────────────────
 
 describe("Database Migrations", () => {
-	let db: ReturnType<typeof createTestDb>;
+	let db: Client;
 
-	beforeEach(() => {
-		db = createTestDb();
+	beforeEach(async () => {
+		db = await createTestDb();
 	});
 
 	afterEach(() => {
 		db.close();
 	});
 
-	it("membuat tabel users", () => {
-		const tables = db
-			.prepare(
-				"SELECT name FROM sqlite_master WHERE type='table' AND name='users'",
-			)
-			.all();
-		expect(tables).toHaveLength(1);
+	it("membuat tabel users", async () => {
+		const result = await db.execute(
+			"SELECT name FROM sqlite_master WHERE type='table' AND name='users'",
+		);
+		expect(result.rows).toHaveLength(1);
 	});
 
-	it("membuat tabel sessions", () => {
-		const tables = db
-			.prepare(
-				"SELECT name FROM sqlite_master WHERE type='table' AND name='sessions'",
-			)
-			.all();
-		expect(tables).toHaveLength(1);
+	it("membuat tabel sessions", async () => {
+		const result = await db.execute(
+			"SELECT name FROM sqlite_master WHERE type='table' AND name='sessions'",
+		);
+		expect(result.rows).toHaveLength(1);
 	});
 
-	it("kolom users sesuai schema", () => {
-		const cols = db.pragma("table_info(users)") as { name: string }[];
-		const colNames = cols.map((c) => c.name);
+	it("kolom users sesuai schema", async () => {
+		const result = await db.execute("PRAGMA table_info(users)");
+		const colNames = result.rows.map((r) => r.name as string);
 		expect(colNames).toContain("id");
 		expect(colNames).toContain("name");
 		expect(colNames).toContain("email");
@@ -80,43 +76,50 @@ describe("Database Migrations", () => {
 		expect(colNames).toContain("updated_at");
 	});
 
-	it("kolom sessions sesuai schema", () => {
-		const cols = db.pragma("table_info(sessions)") as { name: string }[];
-		const colNames = cols.map((c) => c.name);
+	it("kolom sessions sesuai schema", async () => {
+		const result = await db.execute("PRAGMA table_info(sessions)");
+		const colNames = result.rows.map((r) => r.name as string);
 		expect(colNames).toContain("id");
 		expect(colNames).toContain("user_id");
 		expect(colNames).toContain("token");
 		expect(colNames).toContain("expires_at");
 	});
 
-	it("email users bersifat UNIQUE", () => {
-		db.prepare(
-			"INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
-		).run("Alice", "alice@example.com", "hash1");
+	it("email users bersifat UNIQUE", async () => {
+		await db.execute({
+			sql: "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
+			args: ["Alice", "alice@example.com", "hash1"],
+		});
 
-		expect(() => {
-			db.prepare(
-				"INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
-			).run("Alice2", "alice@example.com", "hash2");
-		}).toThrow();
+		await expect(
+			db.execute({
+				sql: "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
+				args: ["Alice2", "alice@example.com", "hash2"],
+			}),
+		).rejects.toThrow();
 	});
 
-	it("sessions ON DELETE CASCADE dari users", () => {
-		const info = db
-			.prepare(
-				"INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
-			)
-			.run("Bob", "bob@example.com", "hash");
+	it("sessions ON DELETE CASCADE dari users", async () => {
+		const insertResult = await db.execute({
+			sql: "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
+			args: ["Bob", "bob@example.com", "hash"],
+		});
 
-		const userId = info.lastInsertRowid;
+		const userId = insertResult.lastInsertRowid!;
 		const future = new Date(Date.now() + 86_400_000).toISOString();
-		db.prepare(
-			"INSERT INTO sessions (id, user_id, token, expires_at) VALUES (?, ?, ?, ?)",
-		).run("sess-1", userId, "tok-1", future);
+		await db.execute({
+			sql: "INSERT INTO sessions (id, user_id, token, expires_at) VALUES (?, ?, ?, ?)",
+			args: ["sess-1", userId, "tok-1", future],
+		});
 
-		db.prepare("DELETE FROM users WHERE id = ?").run(userId);
+		await db.execute({
+			sql: "DELETE FROM users WHERE id = ?",
+			args: [userId],
+		});
 
-		const sessions = db.prepare("SELECT * FROM sessions WHERE id = 'sess-1'").all();
-		expect(sessions).toHaveLength(0);
+		const sessions = await db.execute(
+			"SELECT * FROM sessions WHERE id = 'sess-1'",
+		);
+		expect(sessions.rows).toHaveLength(0);
 	});
 });

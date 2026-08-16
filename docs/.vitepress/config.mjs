@@ -54,14 +54,25 @@ export default defineConfig({
       ],
       '/templates/': [
         {
-          text: 'Template Presets',
+          text: 'Default Templates',
           items: [
             { text: 'Overview', link: '/templates/overview' },
             { text: 'Default', link: '/templates/default' },
             { text: 'Minimal', link: '/templates/minimal' },
             { text: 'Jawa', link: '/templates/jawa' },
           ]
-        }
+        },
+        {
+          text: 'Auth Template',
+          items: [
+            { text: 'getting startted', link: '/templates/auth/getting-started' },
+            { text: 'project structure', link: '/templates/auth/project-structure' },
+            { text: 'Authentication', link: '/templates/auth/authentication' },
+            { text: 'database', link: '/templates/auth/database' },
+            { text: 'deployment', link: '/templates/auth/deployment' },
+            { text: 'environment', link: '/templates/auth/environment' },
+          ]
+        },
       ],
       '/cli/': [
         {

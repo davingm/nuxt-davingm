@@ -4,17 +4,35 @@
 
 ## Perbandingan Template
 
-| Fitur | Default | Minimal | Jawa |
-|---|:---:|:---:|:---:|
-| Nuxt 4 | ✅ | ✅ | ✅ |
-| TypeScript | ✅ | ✅ | ✅ |
-| Tailwind CSS | ✅ | ❌ | ✅ |
-| ESLint + Biome | ✅ | ❌ | ✅ |
-| Vitest | ✅ | ❌ | ✅ |
-| Konfigurasi Deployment | ✅ | ❌ | ✅ |
-| DevContainer | ✅ | ❌ | ✅ |
-| GitHub Actions CI | ✅ | ❌ | ✅ |
-| Opinionated Setup | ⚖️ Moderat | ❌ | 🔥 Maksimal |
+| Fitur | Default | Minimal | auth | blog | portofolio | dasbor |
+|---|:---:|:---:|:---:|:---:| :---:| :---:| 
+| Nuxt 4 | ✔ | ✔ | ✔ |  ✔ | ✔ | ✔ 
+| TypeScript | ✔ | ✔ |  ✔ |  ✔ | ✔ | ✔
+| Tailwind CSS | ✔ | ✔ |  ✔ |  ✔ | ✔ | ✔
+| ESLint + Biome | ✔ | ✘  |  ✔ |  ✔ | ✔ | ✔
+| Vitest | ✔ | ✘  |  ✔ |  ✔ | ✘ | ✔
+| Konfigurasi Deployment | ✔ | ✘  |  ✔ |  ✔ | ✔ | ✔
+| DevContainer | ✔ | ✘  |  ✔ |  ✔ | ✔ | ✔
+| GitHub Actions CI | ✔ | ✘  |  ✔ |  ✔ | ✔ | ✔
+| Opinionated Setup |  Moderat | ✘  |  Maksimal |  ✔ | ✘ | ✘
+| use SEO |  ✔ |  ✘  | ✔ |  ✔ | ✔ | ✘
+| Open Graph |  ✔ |  ✔ |  ✔ |  ✔ | ✔ | ✘
+| simpel-icons |  ✔ | ✘  |  ✔ |  ✔ | ✔ | ✔
+| hero-icons |  ✔ | ✘  |  ✔  |  ✔ | ✘ | ✔
+| markdown UI | ✘  | ✘  | ✘ |  ✔ | ✔ | ✘
+| Twikoo |  ✘ | ✘  | ✘  |  ✔  | ✔ | ✘
+| migration |  ✘ | ✘  | ✔ | ✘ | ✘ | ✘
+| seeders| ✘ | ✘ |  ✔ | ✘ | ✘ | ✘
+| SSG | ✔ | ✔ |  ✔ |  ✔ | ✔ | ✘
+| SSR | ✔ | ✔ |  ✔ |  ✔ | ✔ | ✔
+| CSR | ✔ | ✔ |  ✔ |  ✔ | ✘ | ✔
+| middleware | ✘ | ✘ |  ✔ |  ✘ | ✘ | ✔
+| service | ✔ | ✘ | ✔ | ✘ | ✘ | ✘
+| I81N ( multi bahasa ) | ✘ | ✘ | ✘ | ✔ |✘ | ✘
+| Dasbor | ✘ | ✘ | ✘ | ✘ | ✘ | ✔
+| authentikasi | ✘ | ✘ | ✔ | ✘ | ✘ | hanya ui
+
+
 
 ## Cara Memilih Template
 
@@ -28,10 +46,25 @@
 - Ingin kontrol penuh atas setiap konfigurasi
 - Membangun sesuatu yang sederhana tanpa overhead
 
-**Gunakan Jawa jika:**
-- Kamu sudah familiar dengan workflow Davingm
+**Gunakan auth jika:**
+- Kamu sudah familiar dengan workflow moderen
 - Ingin setup yang paling opinionated dan lengkap
-- Membangun project dengan konfigurasi pribadi Davingm
+- Memiliki sistem full stack tanpa memiliki proyek backend sendiri
+
+**Gunakan blog jika:**
+- Membutuhkan dukungan markdown menjadi html minimalis
+- Membangun sistem Blog sendiri
+- Membutuhkan dukungan *Search Engine Optimization* (SEO)
+
+**Gunakan Portofolio jika:**
+- Sedang Membangun Branding Pribadi
+- Membutuhkan Situs Statis Cepat 
+- Ingin terlihat Profesional dan Proper
+
+**Gunakan Portofolio Dasbor jika:**
+- Sedang Membangun dashbor interaktif 
+- Membutuhkan menejemen ERD bisnis dan dashboard realtime 
+- Dukungan SLA penuh terhadap sistem anda
 
 ## Menambah Template Sendiri
 
