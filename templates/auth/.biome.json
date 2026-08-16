@@ -1,0 +1,5 @@
+{
+  "extends": ["biome:recommended"],
+  "files": ["**/*.{js,ts,jsx,tsx,vue}"],
+  "root": true
+}

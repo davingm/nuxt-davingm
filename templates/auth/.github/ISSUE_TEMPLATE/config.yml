@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 GitHub Discussions
+    url: https://github.com/davingm/nuxt-davingm/discussions
+    about: Gunakan GitHub Discussions untuk pertanyaan seputar penggunaan, bantuan, atau ide umum.
+  - name: 📖 Nuxt Documentation
+    url: https://nuxt.com/docs
+    about: Pelajari dokumentasi resmi Nuxt 4 untuk panduan lengkap.

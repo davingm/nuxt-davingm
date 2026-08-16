@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Default / Light Mode Variables (Soft Cream Theme) */
+:root {
+  --text: #524d46;
+  --text-h: #181715;
+  --bg: #fbf9f5;
+  --card-bg: #ffffff;
+  --border: #e6e0d4;
+  --code-bg: #f1ebd9;
+  --accent: #181715;
+  --accent-bg: #eee7d8;
+  --accent-border: #d4cbb8;
+  --social-bg: #f3ede2;
+  --shadow: rgba(24, 23, 21, 0.06) 0 12px 28px -6px, rgba(24, 23, 21, 0.03) 0 4px 12px -2px;
+
+  --sans: 'Poppins', system-ui, -apple-system, sans-serif;
+  --heading: 'Poppins', system-ui, -apple-system, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Consolas, monospace;
+
+  font: 16px/155% var(--sans);
+  letter-spacing: -0.1px;
+  color: var(--text);
+  background-color: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark Mode Class & Preference Overrides (Vercel Pitch Black Aesthetic) */
+html.dark {
+  --text: #a1a1aa;
+  --text-h: #ffffff;
+  --bg: #000000;
+  --card-bg: #0a0a0a;
+  --border: #262626;
+  --code-bg: #121212;
+  --accent: #ffffff;
+  --accent-bg: #1a1a1a;
+  --accent-border: #333333;
+  --social-bg: #0a0a0a;
+  --shadow: rgba(0, 0, 0, 0.8) 0 12px 28px -6px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--heading);
+  font-weight: 600;
+  color: var(--text-h);
+  letter-spacing: -0.5px;
+}
+
+h1 {
+  font-size: 3.5rem;
+  line-height: 112%;
+  margin: 24px 0 16px;
+}
+
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 2.35rem;
+    margin: 16px 0 12px;
+  }
+}
+
+h2 {
+  font-size: 1.6rem;
+  line-height: 125%;
+  margin: 0 0 8px;
+}
+
+@media (max-width: 1024px) {
+  h2 {
+    font-size: 1.3rem;
+  }
+}
+
+p {
+  margin: 0;
+}
+
+code, .counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 6px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 14px;
+  line-height: 140%;
+  padding: 4px 10px;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+}
+
+.counter {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 10px;
+  color: var(--bg);
+  background: var(--text-h);
+  border: 1px solid var(--text-h);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.counter:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  opacity: 0.92;
+}
+
+#center {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  place-content: center;
+  place-items: center;
+  padding: 80px 32px;
+}
+
+@media (max-width: 1024px) {
+  #center {
+    padding: 44px 20px 32px;
+    gap: 18px;
+  }
+}
+
+#next-steps {
+  display: flex;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+#next-steps > div {
+  flex: 1 1 0;
+  padding: 40px 48px;
+}
+
+@media (max-width: 1024px) {
+  #next-steps {
+    flex-direction: column;
+    text-align: center;
+  }
+  #next-steps > div {
+    padding: 32px 20px;
+  }
+}
+
+#docs {
+  border-right: 1px solid var(--border);
+}
+
+@media (max-width: 1024px) {
+  #docs {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+#next-steps ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 14px;
+  margin: 28px 0 0;
+}
+
+#next-steps ul a {
+  color: var(--text-h);
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 10px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  display: inline-flex;
+  padding: 10px 20px;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+#next-steps ul a:hover {
+  box-shadow: var(--shadow);
+  border-color: var(--text-h);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 1024px) {
+  #next-steps ul {
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  #next-steps ul li {
+    flex: 1 1 calc(50% - 14px);
+  }
+  #next-steps ul a {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+}
+
+.ticks {
+  position: relative;
+  width: 100%;
+}
+
+.ticks::before,
+.ticks::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  border: 5px solid transparent;
+}
+
+.ticks::before {
+  left: 0;
+  border-left-color: var(--border);
+}
+
+.ticks::after {
+  right: 0;
+  border-right-color: var(--border);
+}

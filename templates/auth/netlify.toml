@@ -1,0 +1,14 @@
+[build]
+  command = "pnpm build"
+  publish = ".output/public"
+
+[functions]
+  # If using Nitro with Netlify preset, functions will be generated under
+  # .netlify/functions and include a `server` function
+  directory = ".netlify/functions"
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/server"
+  status = 200
+  force = true
