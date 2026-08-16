@@ -14,9 +14,19 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  nitro: {
+    experimental: {
+      tasks: true,
+    },
+  },
   runtimeConfig: {
+    dbConnection: process.env.DB_CONNECTION || 'sqlite',
+    dbDatabase: process.env.DB_DATABASE || '.data/database.sqlite',
+    dbType: process.env.DB_TYPE || 'update',
+    jwtSecret: process.env.JWT_SECRET || 'supersecretkey_change_me_in_production',
     public: {
-      apiBase: '',
+      apiBase: process.env.API_BASE || '',
+      appName: process.env.NAME_APP || 'Nuxt-app',
     },
   },
 })

@@ -1,3 +1,4 @@
 allowBuilds:
   '@biomejs/biome': false
+  better-sqlite3: true
   esbuild: false

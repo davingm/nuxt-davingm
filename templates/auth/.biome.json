@@ -1,5 +1,13 @@
 {
+  "$schema": "https://biomejs.dev/schemas/1.8.0/schema.json",
   "extends": ["biome:recommended"],
-  "files": ["**/*.{js,ts,jsx,tsx,vue}"],
-  "root": true
+  "files": {
+    "ignore": [
+      "**/.nuxt/**",
+      "**/.output/**",
+      "**/dist/**",
+      "**/node_modules/**",
+      "**/pnpm-lock.yaml"
+    ]
+  }
 }

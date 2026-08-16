@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const year = computed(() => new Date().getFullYear())
+const year = computed(() => new Date().getFullYear());
 </script>
 
 <template>

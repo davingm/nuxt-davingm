@@ -1,14 +1,19 @@
-import { beforeEach } from 'vitest'
+import { beforeEach, vi } from "vitest";
 
-// Provide minimal global mocks for Nuxt composables used in tests
-// Tests can override these globals as needed.
+// ─── Nuxt composable mocks ────────────────────────────────────────────────────
 
 beforeEach(() => {
-  // mock useRuntimeConfig to avoid runtime errors
-  // @ts-ignore
-  globalThis.useRuntimeConfig = globalThis.useRuntimeConfig || (() => ({ public: { apiBase: '' } }))
+	// useRuntimeConfig — kembalikan konfigurasi default untuk test
+	// @ts-ignore
+	globalThis.useRuntimeConfig = () => ({
+		dbConnection: "sqlite",
+		dbDatabase: ":memory:",
+		dbType: "create-drop",
+		jwtSecret: "test-secret",
+		public: { apiBase: "http://localhost:3000/api", appName: "Test App" },
+	});
 
-  // provide a default useApi mock that tests may override
-  // @ts-ignore
-  globalThis.useApi = globalThis.useApi || (() => ((path: string) => Promise.resolve(null)))
-})
+	// useApi — tests dapat override sesuai kebutuhan
+	// @ts-ignore
+	globalThis.useApi = globalThis.useApi || (() => (path: string) => Promise.resolve(null));
+});

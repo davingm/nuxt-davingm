@@ -1,14 +1,11 @@
 <script setup lang="ts">
-const userService = useUserService()
+const userService = useUserService();
 
 const {
-  data: users,
-  pending,
-  error,
-} = await useAsyncData(
-  'users',
-  () => userService.getAll(),
-)
+	data: users,
+	pending,
+	error,
+} = await useAsyncData("users", () => userService.getAll());
 </script>
 
 <template>

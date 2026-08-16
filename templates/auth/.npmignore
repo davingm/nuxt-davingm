@@ -1,0 +1,29 @@
+# Build outputs — di-generate saat user menjalankan nuxt dev / nuxt build
+.nuxt/
+.output/
+.nitro/
+.cache/
+dist/
+
+# Database SQLite — di-generate otomatis saat server pertama kali start
+.data/
+
+# Dependencies — di-install oleh user via pnpm install
+node_modules/
+
+# Environment — user harus buat sendiri dari .env.example
+.env
+.env.local
+.env.*.local
+
+# Editor & OS
+.DS_Store
+.fleet
+.idea
+*.log
+logs/
+
+# Test coverage output
+coverage/
+
+# Lock file (pnpm-lock.yaml tetap disertakan agar versi dependency konsisten)

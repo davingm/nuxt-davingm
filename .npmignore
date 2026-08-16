@@ -12,8 +12,12 @@ templates/**/.nuxt/
 templates/**/.output/
 templates/**/node_modules/
 
-# Internal/dev-only folders in templates
-templates/**/.agents/
+
+# Docs VitePress dari dalam template (bukan untuk pengguna akhir)
+templates/**/docs/
+
+# Database SQLite yang di-generate saat runtime
+templates/**/.data/
 
 # Env files (user generate sendiri)
 templates/**/.env
@@ -27,7 +31,6 @@ templates/**/_payload.js
 .github/
 
 # Dev/config files di root repo
-.devcontainer/
 issues/
 playground/
 .gitignore

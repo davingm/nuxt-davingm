@@ -1,9 +1,10 @@
 <script setup lang="ts">
-const { theme, toggleTheme, initTheme } = useTheme()
+const { theme, toggleTheme, initTheme } = useTheme();
+const { user, isAuthenticated, logout } = useAuth();
 
 onMounted(() => {
-  initTheme()
-})
+	initTheme();
+});
 </script>
 
 <template>
@@ -12,16 +13,32 @@ onMounted(() => {
       <div class="brand">
         <NuxtLink to="/" class="logo-link">
           <Icon name="simple-icons:nuxtdotjs" class="brand-icon" />
-          <span class="brand-title">Default Starter</span>
+          <span class="brand-title">Nuxt Auth Starter</span>
         </NuxtLink>
       </div>
 
       <div class="right-actions">
         <nav class="nav-links">
           <NuxtLink to="/" class="nav-item" exact-active-class="active">Home</NuxtLink>
+          <NuxtLink v-if="isAuthenticated" to="/dashboard" class="nav-item" exact-active-class="active">Dashboard</NuxtLink>
           <a href="https://nuxt.com/docs" target="_blank" rel="noopener" class="nav-item">Docs</a>
-          <a href="https://github.com/vitejs/vite" target="_blank" rel="noopener" class="nav-item">GitHub</a>
         </nav>
+
+        <div class="auth-buttons">
+          <template v-if="isAuthenticated">
+            <div class="user-badge">
+              <span class="user-avatar">{{ user?.name?.charAt(0).toUpperCase() }}</span>
+              <span class="user-name">{{ user?.name }}</span>
+            </div>
+            <button type="button" class="btn-sm-logout" title="Keluar" @click="logout">
+              <Icon name="heroicons:arrow-right-on-rectangle-20-solid" class="auth-btn-icon" />
+            </button>
+          </template>
+          <template v-else>
+            <NuxtLink to="/login" class="btn-login">Masuk</NuxtLink>
+            <NuxtLink to="/register" class="btn-register">Daftar</NuxtLink>
+          </template>
+        </div>
 
         <button
           type="button"
@@ -93,13 +110,13 @@ onMounted(() => {
 .right-actions {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
 }
 
 .nav-item {
@@ -112,6 +129,98 @@ onMounted(() => {
   &:hover,
   &.active {
     color: var(--text-h);
+  }
+}
+
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px 4px 4px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+
+.user-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #09ff00;
+  color: #000;
+  font-weight: 700;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-h);
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-sm-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #ef4444;
+    color: #fff;
+  }
+}
+
+.auth-btn-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.btn-login {
+  color: var(--text-h);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 8px;
+  transition: background 0.2s;
+
+  &:hover {
+    background: var(--card-bg);
+  }
+}
+
+.btn-register {
+  background: #09ff00;
+  color: #000000;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 8px;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #07d600;
+    transform: translateY(-1px);
   }
 }
 
