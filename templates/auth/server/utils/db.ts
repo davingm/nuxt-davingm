@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { createClient, type Client } from "@libsql/client";
+import { type Client, createClient } from "@libsql/client";
 import { runMigrations } from "../database/migrations";
 import { DatabaseSeeder } from "../database/seeders/DatabaseSeeder";
 

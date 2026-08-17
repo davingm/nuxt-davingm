@@ -1,17 +1,16 @@
 <script setup lang="ts">
-const count = ref(0);
 </script>
 
 <template>
   <section id="center">
     <div class="hero">
       <div class="hero-icons">
-        <Icon name="simple-icons:nuxtdotjs" class="hero-brand-icon nuxt-icon" />
+        <Icon name="simple-icons:nuxt" class="hero-brand-icon nuxt-icon" />
         <span class="hero-icon-divider">+</span>
         <Icon name="simple-icons:vite" class="hero-brand-icon vite-icon" />
       </div>
       <span class="hero-badge">
-        <Icon name="simple-icons:nuxtdotjs" class="badge-icon" />
+        <Icon name="simple-icons:nuxt" class="badge-icon" />
         Nuxt 4 Starter Template
       </span>
     </div>
@@ -20,10 +19,6 @@ const count = ref(0);
       <h1>Get Started</h1>
       <p>Edit <code>app/pages/index.vue</code> and save to test <code>HMR</code></p>
     </div>
-
-    <button type="button" class="counter" @click="count++">
-      Count is {{ count }}
-    </button>
   </section>
 </template>
 

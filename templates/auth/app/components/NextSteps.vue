@@ -12,7 +12,7 @@
       <ul>
         <li>
           <a href="https://nuxt.com/docs" target="_blank" rel="noopener">
-            <Icon name="simple-icons:nuxtdotjs" class="item-icon" />
+            <Icon name="simple-icons:nuxt" class="item-icon" />
             Explore Nuxt Docs
           </a>
         </li>

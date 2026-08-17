@@ -16,6 +16,10 @@ Template **Default** adalah opinionated setup yang menyertakan semua tooling yan
 | [Biome](https://biomejs.dev) | Latest | Linter & formatter (menggantikan ESLint + Prettier) |
 | [Vitest](https://vitest.dev) | Latest | Unit testing framework |
 | [Nuxt Icon](https://github.com/nuxt/icon) | Latest | Icon component |
+| [GitHub Actions](https://docs.github.com/en/actions) | Latest | CI/CD pipeline |
+| [Open Graph](https://og-image.vercel.app/) | Latest | Dynamic social media images |
+| [SSG](https://nuxt.com/docs/guide/concepts/static-site-generation) | Latest | Static site generation |
+| [DevContainer](https://containers.dev/) | Latest | Development environment in container |
 
 ## Struktur Project
 
@@ -25,7 +29,7 @@ my-project/
 │   ├── devcontainer.json
 │   └── Dockerfile
 ├── .github/
-│   ├── ISSUE_TEMPLATE/     # Template issue GitHub
+│   ├── ISSUE_TEMPLATE /     # Template issue GitHub
 │   ├── workflows/
 │   │   └── ci.yml          # CI/CD dengan GitHub Actions
 │   └── PULL_REQUEST_TEMPLATE.md

@@ -1,10 +1,6 @@
 <script setup lang="ts">
-const { theme, toggleTheme, initTheme } = useTheme();
+const { theme, toggleTheme } = useTheme();
 const { user, isAuthenticated, logout } = useAuth();
-
-onMounted(() => {
-	initTheme();
-});
 </script>
 
 <template>
@@ -12,7 +8,7 @@ onMounted(() => {
     <div class="header-container">
       <div class="brand">
         <NuxtLink to="/" class="logo-link">
-          <Icon name="simple-icons:nuxtdotjs" class="brand-icon" />
+          <Icon name="simple-icons:nuxt" class="brand-icon" />
           <span class="brand-title">Nuxt Auth Starter</span>
         </NuxtLink>
       </div>
@@ -21,7 +17,7 @@ onMounted(() => {
         <nav class="nav-links">
           <NuxtLink to="/" class="nav-item" exact-active-class="active">Home</NuxtLink>
           <NuxtLink v-if="isAuthenticated" to="/dashboard" class="nav-item" exact-active-class="active">Dashboard</NuxtLink>
-          <a href="https://nuxt.com/docs" target="_blank" rel="noopener" class="nav-item">Docs</a>
+          <a href="https://nuxt.davingm.com/templates/auth/getting-started.html" target="_blank" rel="noopener" class="nav-item">Docs</a>
         </nav>
 
         <div class="auth-buttons">
@@ -46,9 +42,15 @@ onMounted(() => {
           :aria-label="`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`"
           @click="toggleTheme"
         >
-          <Icon v-if="theme === 'dark'" name="heroicons:sun-20-solid" class="theme-icon" />
-          <Icon v-else name="heroicons:moon-20-solid" class="theme-icon" />
-          <span class="theme-label">{{ theme === 'light' ? 'Dark' : 'Light' }}</span>
+          <ClientOnly>
+            <Icon v-if="theme === 'dark'" name="heroicons:sun-20-solid" class="theme-icon" />
+            <Icon v-else name="heroicons:moon-20-solid" class="theme-icon" />
+            <span class="theme-label">{{ theme === 'light' ? 'Dark' : 'Light' }}</span>
+            <template #fallback>
+              <Icon name="heroicons:moon-20-solid" class="theme-icon" />
+              <span class="theme-label">Dark</span>
+            </template>
+          </ClientOnly>
         </button>
       </div>
     </div>
@@ -57,18 +59,21 @@ onMounted(() => {
 
 <style scoped>
 .app-header {
-  border-bottom: 1px solid var(--border);
-  background: var(--bg);
   position: sticky;
   top: 0;
   z-index: 50;
-  backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .header-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 18px 40px;
+  padding: 0 40px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -76,177 +81,213 @@ onMounted(() => {
 
 @media (max-width: 1024px) {
   .header-container {
-    padding: 16px 20px;
+    padding: 0 20px;
   }
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
 }
 
 .logo-link {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
   text-decoration: none;
   color: var(--text-h);
-  font-weight: 700;
-  font-size: 1.15rem;
-  letter-spacing: -0.3px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: -0.02em;
+  transition: opacity 0.15s ease;
+}
+
+.logo-link:hover {
+  opacity: 0.8;
 }
 
 .brand-icon {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   color: #09ff00;
+  flex-shrink: 0;
 }
 
 .brand-title {
   font-family: var(--heading);
+  white-space: nowrap;
 }
 
 .right-actions {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 6px;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 2px;
 }
 
 .nav-item {
-  color: var(--text);
+  color: var(--text-muted);
   text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 500;
-  transition: color 0.2s;
+  font-size: 0.875rem;
+  font-weight: 450;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: color 0.15s ease, background 0.15s ease;
+  letter-spacing: -0.01em;
+  line-height: 1.25rem;
+}
 
-  &:hover,
-  &.active {
-    color: var(--text-h);
-  }
+.nav-item:hover {
+  color: var(--text-h);
+  background: color-mix(in srgb, var(--text-h) 6%, transparent);
+}
+
+.nav-item.active {
+  color: var(--text-h);
+  background: color-mix(in srgb, var(--text-h) 8%, transparent);
 }
 
 .auth-buttons {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
+  margin-left: 6px;
 }
 
 .user-badge {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 4px 10px 4px 4px;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 20px;
+  padding: 3px 12px 3px 3px;
+  background: color-mix(in srgb, var(--text-h) 5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  border-radius: 100px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.user-badge:hover {
+  border-color: color-mix(in srgb, var(--border) 120%, transparent);
+  background: color-mix(in srgb, var(--text-h) 7%, transparent);
 }
 
 .user-avatar {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: #09ff00;
   color: #000;
-  font-weight: 700;
-  font-size: 0.8rem;
+  font-weight: 600;
+  font-size: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: -0.02em;
 }
 
 .user-name {
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.8125rem;
+  font-weight: 500;
   color: var(--text-h);
   max-width: 100px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: -0.01em;
 }
 
 .btn-sm-logout {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px;
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  color: #ef4444;
-  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
 
-  &:hover {
-    background: #ef4444;
-    color: #fff;
-  }
+.btn-sm-logout:hover {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
 }
 
 .auth-btn-icon {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
 }
 
 .btn-login {
-  color: var(--text-h);
+  color: var(--text-muted);
   text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.875rem;
+  font-weight: 450;
   padding: 6px 14px;
   border-radius: 8px;
-  transition: background 0.2s;
+  transition: color 0.15s ease, background 0.15s ease;
+  letter-spacing: -0.01em;
+  line-height: 1.25rem;
+}
 
-  &:hover {
-    background: var(--card-bg);
-  }
+.btn-login:hover {
+  color: var(--text-h);
+  background: color-mix(in srgb, var(--text-h) 6%, transparent);
 }
 
 .btn-register {
-  background: #09ff00;
-  color: #000000;
+  background: var(--text-h);
+  color: var(--bg);
   text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 700;
+  font-size: 0.875rem;
+  font-weight: 500;
   padding: 6px 16px;
   border-radius: 8px;
-  transition: all 0.2s;
+  transition: opacity 0.15s ease;
+  letter-spacing: -0.01em;
+  line-height: 1.25rem;
+}
 
-  &:hover {
-    background: #07d600;
-    transform: translateY(-1px);
-  }
+.btn-register:hover {
+  opacity: 0.85;
 }
 
 .theme-toggle {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 14px;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  color: var(--text-h);
-  font-size: 0.85rem;
-  font-weight: 500;
+  padding: 5px 12px;
+  margin-left: 4px;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  font-weight: 450;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  letter-spacing: -0.01em;
+  line-height: 1.25rem;
 }
 
 .theme-toggle:hover {
-  border-color: var(--text-h);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow);
+  color: var(--text-h);
+  border-color: color-mix(in srgb, var(--border) 140%, transparent);
+  background: color-mix(in srgb, var(--text-h) 5%, transparent);
 }
 
 .theme-icon {
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
 }
 </style>

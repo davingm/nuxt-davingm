@@ -4,6 +4,8 @@ definePageMeta({
 	layout: "auth",
 });
 
+const decoImageSrc = "/images/nuxt-nation.webp";
+
 const { login } = useAuth();
 const router = useRouter();
 
@@ -38,32 +40,59 @@ const handleLogin = async () => {
 </script>
 
 <template>
-  <div class="split-screen">
+  <div class="flex min-h-screen w-full relative max-[768px]:flex-col">
+
+    <!-- Logo kiri atas -->
+    <div class="absolute top-6 left-8 z-10 flex items-center max-[768px]:top-4 max-[768px]:left-5">
+      <NuxtLink to="/">
+        <Icon name="simple-icons:nuxt" class="w-[26px] h-[26px] text-[var(--text-h)]" />
+      </NuxtLink>
+    </div>
 
     <!-- Kiri: Form -->
-    <div class="form-side">
-      <div class="form-inner">
+    <div class="w-full max-w-[520px] min-w-[400px] max-[1024px]:min-w-0 max-[768px]:max-w-full max-[768px]:min-w-0 flex items-center justify-center py-12 px-10 max-[768px]:px-6 max-[768px]:pb-10 max-[400px]:px-4 max-[400px]:pb-8 bg-[var(--bg)] box-border">
+      <div class="w-full max-w-[400px] max-[768px]:max-w-full flex flex-col">
 
-        <!-- Logo -->
-        <div class="brand">
-          <div class="brand-icon">
-            <Icon name="simple-icons:nuxtdotjs" class="brand-logo" />
-          </div>
+        <h1 class="text-2xl font-bold text-[var(--text-h)] mb-6 -tracking-[0.4px] leading-tight">Masuk ke Nuxt</h1>
+
+        <!-- Social Login -->
+        <div class="grid grid-cols-3 gap-2 mb-2 max-[400px]:gap-[6px]">
+          <button type="button" class="social-btn" @click="() => {}">
+            <Icon name="simple-icons:google" class="w-4 h-4 shrink-0" />
+            <span class="-tracking-[0.01em] max-[400px]:hidden">Google</span>
+          </button>
+          <button type="button" class="social-btn" @click="() => {}">
+            <Icon name="simple-icons:apple" class="w-4 h-4 shrink-0" />
+            <span class="-tracking-[0.01em] max-[400px]:hidden">Apple</span>
+          </button>
+          <button type="button" class="social-btn" @click="() => {}">
+            <Icon name="simple-icons:github" class="w-4 h-4 shrink-0" />
+            <span class="-tracking-[0.01em] max-[400px]:hidden">GitHub</span>
+          </button>
         </div>
 
-        <h1 class="form-title">Masuk ke akun Anda</h1>
-        <p class="form-subtitle">Belum punya akun? <NuxtLink to="/register" class="link">Daftar sekarang</NuxtLink></p>
+        <button type="button" class="sso-btn" @click="() => {}">
+          <Icon name="heroicons:arrow-right-on-rectangle-20-solid" class="w-[15px] h-[15px] shrink-0 opacity-60" />
+          <span class="-tracking-[0.01em]">Lanjutkan dengan SSO</span>
+        </button>
+
+        <!-- Divider -->
+        <div class="flex items-center gap-[14px] mb-5">
+          <span class="flex-1 h-px bg-[var(--border)]" />
+          <span class="text-xs font-[450] text-[var(--text-muted)] tracking-[0.02em] shrink-0">atau</span>
+          <span class="flex-1 h-px bg-[var(--border)]" />
+        </div>
 
         <!-- Error -->
-        <div v-if="errorMessage" class="error-box" role="alert">
-          <Icon name="heroicons:exclamation-circle-20-solid" class="error-icon" />
+        <div v-if="errorMessage" class="flex items-start gap-[10px] px-[14px] py-[11px] bg-red-500/[0.06] border border-red-500/20 rounded-lg text-red-600 text-[0.8125rem] mb-4 leading-[1.45]" role="alert">
+          <Icon name="heroicons:exclamation-circle-20-solid" class="w-4 h-4 shrink-0 mt-[1px]" />
           <span>{{ errorMessage }}</span>
         </div>
 
         <!-- Form -->
-        <form class="form" @submit.prevent="handleLogin">
-          <div class="field">
-            <label for="email" class="label">Email</label>
+        <form class="flex flex-col gap-4" @submit.prevent="handleLogin">
+          <div class="flex flex-col gap-[6px]">
+            <label for="email" class="text-[0.8125rem] font-[550] text-[var(--text-h)] -tracking-[0.01em]">Email</label>
             <input
               id="email"
               v-model="email"
@@ -71,13 +100,13 @@ const handleLogin = async () => {
               placeholder="nama@email.com"
               autocomplete="email"
               required
-              class="input"
+              class="input-field"
             />
           </div>
 
-          <div class="field">
-            <label for="password" class="label">Password</label>
-            <div class="input-wrap">
+          <div class="flex flex-col gap-[6px]">
+            <label for="password" class="text-[0.8125rem] font-[550] text-[var(--text-h)] -tracking-[0.01em]">Password</label>
+            <div class="relative">
               <input
                 id="password"
                 v-model="password"
@@ -85,40 +114,73 @@ const handleLogin = async () => {
                 placeholder="••••••••"
                 autocomplete="current-password"
                 required
-                class="input"
+                class="input-field pr-10"
               />
               <button
                 type="button"
-                class="eye-btn"
+                class="absolute right-[10px] top-1/2 -translate-y-1/2 bg-transparent border-none cursor-pointer p-[3px] text-[var(--text-muted)] flex items-center transition-colors duration-150 hover:text-[var(--text-h)]"
                 :aria-label="showPassword ? 'Sembunyikan password' : 'Tampilkan password'"
                 @click="showPassword = !showPassword"
               >
                 <Icon
                   :name="showPassword ? 'heroicons:eye-slash-20-solid' : 'heroicons:eye-20-solid'"
-                  class="eye-icon"
+                  class="w-4 h-4"
                 />
               </button>
             </div>
           </div>
 
-          <button type="submit" :disabled="isLoading" class="btn-submit">
-            <Icon v-if="isLoading" name="heroicons:arrow-path-20-solid" class="spin-icon" />
+          <button type="submit" :disabled="isLoading" class="flex justify-center items-center gap-2 w-full py-[10px] mt-[2px] bg-[var(--text-h)] text-[var(--bg)] text-sm font-semibold font-[var(--sans)] border-none rounded-lg cursor-pointer -tracking-[0.01em] transition-opacity duration-150 hover:not-disabled:opacity-85 active:not-disabled:opacity-75 disabled:opacity-45 disabled:cursor-not-allowed">
+            <Icon v-if="isLoading" name="heroicons:arrow-path-20-solid" class="w-[15px] h-[15px] animate-[spin_0.8s_linear_infinite]" />
             <span>{{ isLoading ? "Memproses..." : "Masuk" }}</span>
           </button>
         </form>
 
+        <!-- Bottom links -->
+        <div class="flex items-center justify-center gap-3 mt-5">
+          <NuxtLink to="/register" class="text-[var(--text-muted)] no-underline text-[0.8125rem] -tracking-[0.01em] transition-colors duration-150 hover:text-[var(--text-h)]">
+            Belum punya akun? <strong class="text-[var(--text-h)] font-semibold">Daftar</strong>
+          </NuxtLink>
+          <span class="w-px h-3 bg-[var(--border)] shrink-0" />
+          <a href="#" class="text-[var(--text-muted)] no-underline text-[0.8125rem] -tracking-[0.01em] transition-colors duration-150 hover:text-[var(--text-h)]">Lupa password?</a>
+        </div>
+
       </div>
     </div>
 
-    <!-- Kanan: Panel dekoratif -->
-    <div class="deco-side" aria-hidden="true">
-      <div class="deco-content">
-        <div class="dot-grid" />
-        <div class="deco-text">
-          <p class="deco-label">Nuxt Auth Starter</p>
-          <h2 class="deco-heading">Autentikasi yang bersih dan siap pakai.</h2>
-          <p class="deco-desc">Dibangun di atas Nuxt 4, SQLite, dan Tailwind CSS. Fokus pada fitur, bukan konfigurasi.</p>
+    <!-- Kanan: Panel gambar + teks -->
+    <div class="flex-1 relative overflow-hidden bg-[#0a0a0a] max-[768px]:min-h-[260px] max-[768px]:flex-none" aria-hidden="true">
+      <div class="absolute inset-0 w-full h-full">
+        <img
+          :src="decoImageSrc"
+          alt=""
+          class="w-full h-full object-cover object-center block"
+          width="960"
+          height="1280"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/35 pointer-events-none z-[1]" />
+      <div class="deco-edge-fade" />
+
+      <div class="absolute bottom-0 left-0 right-0 z-[3] px-[52px] pb-14 pt-14 box-border max-w-[420px] max-[768px]:p-7 max-[400px]:p-5 max-[768px]:max-w-full">
+        <p class="text-[0.6875rem] font-semibold tracking-[0.12em] uppercase text-black/70 mb-[14px]">Nuxt Nation 2026</p>
+        <h2 class="text-[2rem] font-bold leading-[1.15] text-[#f0f0f0] mb-5 -tracking-[0.4px] max-[768px]:text-2xl">Bergabung Dengan Para Insinyur Nuxt.</h2>
+        <div class="flex flex-col gap-2 mb-7">
+          <p class="flex items-center gap-2 text-sm text-white/55 -tracking-[0.01em]">
+            <Icon name="heroicons:calendar-days-20-solid" class="w-[15px] h-[15px] shrink-0 opacity-65" />
+            15 – 17 Oktober 2026
+          </p>
+          <p class="flex items-center gap-2 text-sm text-white/55 -tracking-[0.01em]">
+            <Icon name="heroicons:map-pin-20-solid" class="w-[15px] h-[15px] shrink-0 opacity-65" />
+            Bandung, Indonesia
+          </p>
         </div>
+        <a href="https://nuxt.com/nation" target="_blank" rel="noopener" class="group inline-flex items-center gap-[7px] px-5 py-[9px] bg-[#09ff00] text-[#050505] text-[0.8125rem] font-semibold rounded-lg no-underline -tracking-[0.01em] w-fit transition-opacity duration-150 hover:opacity-82">
+          Daftar sekarang
+          <Icon name="heroicons:arrow-right-20-solid" class="w-[14px] h-[14px] transition-transform duration-150 group-hover:translate-x-0.5" />
+        </a>
       </div>
     </div>
 
@@ -126,315 +188,110 @@ const handleLogin = async () => {
 </template>
 
 <style scoped>
-/* ─── Layout ─────────────────────────────────────────────────────────────── */
-.split-screen {
-  display: flex;
-  min-height: 100vh;
-  width: 100%;
-}
+/* ── Hanya bagian yang tidak bisa diwakili Tailwind murni ─────────────── */
 
-/* ─── Kiri: Form Side ────────────────────────────────────────────────────── */
-.form-side {
-  width: 100%;
-  max-width: 520px;
+/* Social button — color-mix hover */
+.social-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 48px 40px;
-  background-color: var(--bg);
-  box-sizing: border-box;
-}
-
-.form-inner {
-  width: 100%;
-  max-width: 360px;
-}
-
-/* Brand */
-.brand {
-  margin-bottom: 32px;
-}
-
-.brand-icon {
-  display: inline-flex;
-  padding: 10px;
-  background: var(--accent-bg);
-  border: 1px solid var(--accent-border);
-  border-radius: 12px;
-}
-
-.brand-logo {
-  width: 28px;
-  height: 28px;
-  color: var(--accent);
-}
-
-/* Heading */
-.form-title {
-  font-size: 1.6rem;
-  font-weight: 700;
+  gap: 7px;
+  padding: 9px 0;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
   color: var(--text-h);
-  margin: 0 0 8px;
-  letter-spacing: -0.5px;
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.social-btn:hover {
+  background: color-mix(in srgb, var(--text-h) 5%, transparent);
+  border-color: color-mix(in srgb, var(--text-h) 20%, var(--border));
 }
 
-.form-subtitle {
-  font-size: 0.875rem;
-  color: var(--text);
-  margin: 0 0 32px;
-}
-
-.link {
-  color: var(--text-h);
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.link:hover {
-  opacity: 0.75;
-}
-
-/* Error */
-.error-box {
+/* SSO button — color-mix hover */
+.sso-btn {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 14px;
-  background: rgba(239, 68, 68, 0.08);
-  border: 1px solid rgba(239, 68, 68, 0.25);
-  border-radius: 8px;
-  color: #dc2626;
-  font-size: 0.875rem;
-  margin-bottom: 20px;
-}
-
-.error-icon {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-}
-
-/* Form */
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.label {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--text-h);
-  letter-spacing: 0.2px;
-}
-
-.input {
+  justify-content: center;
+  gap: 8px;
   width: 100%;
-  padding: 10px 14px;
+  padding: 9px 16px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-h);
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.sso-btn:hover {
+  background: color-mix(in srgb, var(--text-h) 5%, transparent);
+  border-color: color-mix(in srgb, var(--text-h) 20%, var(--border));
+}
+
+/* Input — color-mix focus ring */
+.input-field {
+  width: 100%;
+  padding: 9px 13px;
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 8px;
   color: var(--text-h);
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   font-family: var(--sans);
-  transition: border-color 0.15s, box-shadow 0.15s;
+  letter-spacing: -0.01em;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
   box-sizing: border-box;
 }
-
-.input::placeholder {
-  color: var(--text);
-  opacity: 0.6;
-}
-
-.input:focus {
-  outline: none;
-  border-color: var(--text-h);
-  box-shadow: 0 0 0 3px var(--accent-bg);
-}
-
-/* Password wrapper */
-.input-wrap {
-  position: relative;
-}
-
-.input-wrap .input {
-  padding-right: 42px;
-}
-
-.eye-btn {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 2px;
-  color: var(--text);
-  display: flex;
-  align-items: center;
-  transition: color 0.15s;
-}
-
-.eye-btn:hover {
-  color: var(--text-h);
-}
-
-.eye-icon {
-  width: 17px;
-  height: 17px;
-}
-
-/* Submit button */
-.btn-submit {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  padding: 11px;
-  margin-top: 4px;
-  background: var(--text-h);
-  color: var(--bg);
-  font-size: 0.9rem;
-  font-weight: 600;
-  font-family: var(--sans);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: opacity 0.15s, transform 0.15s;
-}
-
-.btn-submit:hover:not(:disabled) {
-  opacity: 0.85;
-  transform: translateY(-1px);
-}
-
-.btn-submit:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.spin-icon {
-  width: 16px;
-  height: 16px;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* ─── Kanan: Deco Side ───────────────────────────────────────────────────── */
-.deco-side {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-  background: var(--text-h);
-  display: flex;
-  align-items: flex-end;
-}
-
-.deco-content {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 56px 52px;
-  box-sizing: border-box;
-}
-
-/* Dot grid pattern */
-.dot-grid {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(
-    circle,
-    color-mix(in srgb, var(--bg) 18%, transparent) 1px,
-    transparent 1px
-  );
-  background-size: 24px 24px;
+.input-field::placeholder {
+  color: var(--text-muted);
   opacity: 0.7;
 }
+.input-field:focus {
+  outline: none;
+  border-color: var(--text-h);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--text-h) 8%, transparent);
+}
 
-/* Glow blob */
-.deco-content::before {
-  content: "";
+/* Edge fade — arah gradient berubah drastis di mobile (horizontal → vertikal) */
+.deco-edge-fade {
   position: absolute;
-  top: -80px;
-  right: -80px;
-  width: 480px;
-  height: 480px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    color-mix(in srgb, var(--bg) 12%, transparent) 0%,
-    transparent 70%
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 120px;
+  background: linear-gradient(
+    90deg,
+    #0a0a0a 0%,
+    rgba(10, 10, 10, 0.35) 45%,
+    transparent 100%
   );
   pointer-events: none;
+  z-index: 2;
 }
 
-.deco-text {
-  position: relative;
-  z-index: 1;
-  max-width: 400px;
-}
-
-.deco-label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: color-mix(in srgb, var(--bg) 50%, transparent);
-  margin-bottom: 12px;
-}
-
-.deco-heading {
-  font-size: 2.1rem;
-  font-weight: 700;
-  line-height: 1.15;
-  color: var(--bg);
-  margin: 0 0 16px;
-  letter-spacing: -0.5px;
-}
-
-.deco-desc {
-  font-size: 0.95rem;
-  line-height: 1.65;
-  color: color-mix(in srgb, var(--bg) 65%, transparent);
-}
-
-/* ─── Responsive ─────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .split-screen {
-    flex-direction: column;
-  }
-
-  .form-side {
-    max-width: 100%;
-    padding: 40px 24px;
-  }
-
-  .deco-side {
-    min-height: 220px;
-    flex: none;
-  }
-
-  .deco-content {
-    padding: 32px 28px;
-  }
-
-  .deco-heading {
-    font-size: 1.5rem;
+  .deco-edge-fade {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(10, 10, 10, 0.45) 55%,
+      #0a0a0a 100%
+    );
   }
 }
 </style>

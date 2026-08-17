@@ -1,9 +1,7 @@
 import { DatabaseSeeder } from "../../database/seeders/DatabaseSeeder";
 
 const defineTask =
-	typeof defineNitroTask !== "undefined"
-		? defineNitroTask
-		: (fn: any) => fn;
+	typeof defineNitroTask !== "undefined" ? defineNitroTask : (fn: any) => fn;
 
 export default defineTask(async () => {
 	console.log("[Nitro Task] Memulai tugas db:seed...");

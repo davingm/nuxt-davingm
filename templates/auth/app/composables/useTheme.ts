@@ -1,7 +1,16 @@
 export type Theme = "light" | "dark";
 
 export const useTheme = () => {
-	const theme = useState<Theme>("theme", () => "light");
+	// Inisialisasi state dari kelas DOM yang sudah di-set oleh inline script
+	// agar tidak ada mismatch antara SSR state dan DOM saat hydration
+	const theme = useState<Theme>("theme", () => {
+		if (import.meta.client) {
+			return document.documentElement.classList.contains("dark")
+				? "dark"
+				: "light";
+		}
+		return "light";
+	});
 
 	const applyTheme = (newTheme: Theme) => {
 		theme.value = newTheme;
@@ -17,16 +26,14 @@ export const useTheme = () => {
 		applyTheme(nextTheme);
 	};
 
-	const initTheme = () => {
+	// Sinkronkan Vue state dengan kelas DOM (dijalankan di client setelah hydration)
+	const syncTheme = () => {
 		if (import.meta.client) {
-			const savedTheme = localStorage.getItem("theme") as Theme | null;
-			if (savedTheme === "light" || savedTheme === "dark") {
-				applyTheme(savedTheme);
-			} else {
-				const systemDark = window.matchMedia(
-					"(prefers-color-scheme: dark)",
-				).matches;
-				applyTheme(systemDark ? "dark" : "light");
+			const domTheme = document.documentElement.classList.contains("dark")
+				? "dark"
+				: "light";
+			if (theme.value !== domTheme) {
+				theme.value = domTheme;
 			}
 		}
 	};
@@ -34,6 +41,6 @@ export const useTheme = () => {
 	return {
 		theme,
 		toggleTheme,
-		initTheme,
+		syncTheme,
 	};
 };

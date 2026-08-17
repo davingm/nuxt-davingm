@@ -100,9 +100,7 @@ export async function runMigrations() {
 			await db.execute(DROP_SESSIONS);
 			await db.execute(DROP_USERS);
 		} else {
-			console.log(
-				"[Migration] Mode: update — membuat tabel jika belum ada...",
-			);
+			console.log("[Migration] Mode: update — membuat tabel jika belum ada...");
 		}
 
 		await db.execute(CREATE_USERS);

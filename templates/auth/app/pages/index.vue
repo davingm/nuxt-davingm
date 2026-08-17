@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  middleware: ["redirect-authenticated"],
+  layout: "default",
+});
 </script>
 
 <template>

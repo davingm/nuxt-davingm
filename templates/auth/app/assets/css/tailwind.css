@@ -1,26 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Default / Light Mode Variables (Soft Cream Theme) */
+/* ─── Light Mode Variables ───────────────────────────────────────────────── */
 :root {
+	/* ── Warna teks ── */
 	--text: #524d46;
 	--text-h: #181715;
-	--bg: #fbf9f5;
+	--text-muted: #8a8278;
+
+	/* ── Background ── */
+	--bg: #fbf9f5;           /* background halaman biasa */
 	--card-bg: #ffffff;
+
+	/* ── Border & surface ── */
 	--border: #e6e0d4;
 	--code-bg: #f1ebd9;
+
+	/* ── Accent ── */
 	--accent: #181715;
 	--accent-bg: #eee7d8;
 	--accent-border: #d4cbb8;
 	--social-bg: #f3ede2;
-	--shadow: rgba(24, 23, 21, 0.06) 0 12px 28px -6px, rgba(24, 23, 21, 0.03) 0
-		4px 12px -2px;
+	--shadow: rgba(24, 23, 21, 0.06) 0 12px 28px -6px, rgba(24, 23, 21, 0.03) 0 4px 12px -2px;
 
-	--sans: "Poppins", system-ui, -apple-system, sans-serif;
-	--heading: "Poppins", system-ui, -apple-system, sans-serif;
+	/* ── Dashboard inset area (putih, sedikit berbeda dari --bg) ── */
+	--inset-bg: #ffffff;          /* main content + top bar */
+	--inset-surface: #f5f3ef;     /* card/surface di dalam inset, lebih gelap dari inset */
+	--inset-border-color: #e8e2d9;
+
+	/* ── Sidebar (light mode: abu muda/warm, berbeda dari inset putih) ── */
+	--sidebar-background: 38 20% 95%;       /* #f0ede8 — warm off-white, beda dari inset */
+	--sidebar-foreground: 30 5% 20%;        /* teks gelap */
+	--sidebar-primary: 30 5% 10%;           /* item aktif bg */
+	--sidebar-primary-foreground: 0 0% 98%; /* teks di atas item aktif */
+	--sidebar-accent: 38 15% 90%;           /* hover bg */
+	--sidebar-accent-foreground: 30 5% 15%; /* teks hover */
+	--sidebar-border: 38 15% 86%;           /* border sidebar */
+	--sidebar-ring: 217.2 91.2% 59.8%;
+
+	/* ── Tailwind/ShadCN tokens (dipakai oleh komponen shadcn) ── */
+	--background: 45 43% 97%;
+	--foreground: 30 5% 10%;
+	--card: 0 0% 100%;
+	--card-foreground: 30 5% 10%;
+	--popover: 0 0% 100%;
+	--popover-foreground: 30 5% 10%;
+	--primary: 30 5% 10%;
+	--primary-foreground: 45 43% 97%;
+	--secondary: 38 30% 94%;
+	--secondary-foreground: 30 5% 10%;
+	--muted: 38 20% 94%;
+	--muted-foreground: 30 5% 45%;
+	--accent-tw: 38 30% 92%;
+	--accent-tw-foreground: 30 5% 10%;
+	--destructive: 0 84% 60%;
+	--destructive-foreground: 0 0% 100%;
+	--border-hsl: 38 25% 88%;
+	--input-hsl: 38 20% 88%;
+	--ring: 30 5% 10%;
+	--radius: 0.5rem;
+
+	--sans: "Instrument Sans", "Poppins", system-ui, -apple-system, sans-serif;
+	--heading: "Instrument Sans", "Poppins", system-ui, -apple-system, sans-serif;
 	--mono: ui-monospace, SFMono-Regular, Consolas, monospace;
 
 	font: 16px / 155% var(--sans);
@@ -33,19 +78,63 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-/* Dark Mode Class & Preference Overrides (Vercel Pitch Black Aesthetic) */
+/* ─── Dark Mode Overrides ────────────────────────────────────────────────── */
 html.dark {
+	/* ── Warna teks ── */
 	--text: #a1a1aa;
 	--text-h: #ffffff;
+	--text-muted: #71717a;
+
+	/* ── Background ── */
 	--bg: #000000;
 	--card-bg: #0a0a0a;
+
+	/* ── Border & surface ── */
 	--border: #262626;
 	--code-bg: #121212;
+
+	/* ── Accent ── */
 	--accent: #ffffff;
 	--accent-bg: #1a1a1a;
 	--accent-border: #333333;
 	--social-bg: #0a0a0a;
 	--shadow: rgba(0, 0, 0, 0.8) 0 12px 28px -6px;
+
+	/* ── Dashboard inset area (dark, sedikit lebih terang dari sidebar) ── */
+	--inset-bg: #111111;          /* main content + top bar */
+	--inset-surface: #0a0a0a;     /* card/surface di dalam inset, lebih gelap */
+	--inset-border-color: #2a2a2a;
+
+	/* ── Sidebar (tetap sama gelap) ── */
+	--sidebar-background: 0 0% 7.06%;
+	--sidebar-foreground: 0 0% 93%;
+	--sidebar-primary: 0 0% 100%;
+	--sidebar-primary-foreground: 0 0% 7%;
+	--sidebar-accent: 0 0% 13%;
+	--sidebar-accent-foreground: 0 0% 95%;
+	--sidebar-border: 0 0% 16%;
+	--sidebar-ring: 217.2 91.2% 59.8%;
+
+	/* ── Tailwind/ShadCN tokens (dark) ── */
+	--background: 0 0% 0%;
+	--foreground: 0 0% 100%;
+	--card: 0 0% 4%;
+	--card-foreground: 0 0% 100%;
+	--popover: 0 0% 4%;
+	--popover-foreground: 0 0% 100%;
+	--primary: 0 0% 100%;
+	--primary-foreground: 0 0% 0%;
+	--secondary: 0 0% 10%;
+	--secondary-foreground: 0 0% 100%;
+	--muted: 0 0% 10%;
+	--muted-foreground: 0 0% 65%;
+	--accent-tw: 0 0% 12%;
+	--accent-tw-foreground: 0 0% 100%;
+	--destructive: 0 84% 60%;
+	--destructive-foreground: 0 0% 100%;
+	--border-hsl: 0 0% 15%;
+	--input-hsl: 0 0% 15%;
+	--ring: 0 0% 100%;
 }
 
 body {

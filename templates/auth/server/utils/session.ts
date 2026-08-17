@@ -3,6 +3,7 @@ import { deleteCookie, getHeader, parseCookies, setCookie } from "h3";
 import { type UserRecord, findSessionByToken } from "./db";
 
 export const SESSION_COOKIE_NAME = "auth_token";
+export const SESSION_INDICATOR_COOKIE = "has_session";
 
 export function getSessionToken(event: H3Event): string | null {
 	// Check cookie first
@@ -32,10 +33,22 @@ export function setSessionCookie(
 		expires: expiresAt,
 		path: "/",
 	});
+	// Non-httpOnly indicator — hanya sinyal bahwa session ada, bukan token asli.
+	// Bisa dibaca client-side untuk skip hit /api/auth/me saat belum login.
+	setCookie(event, SESSION_INDICATOR_COOKIE, "1", {
+		httpOnly: false,
+		sameSite: "lax",
+		secure: process.env.NODE_ENV === "production",
+		expires: expiresAt,
+		path: "/",
+	});
 }
 
 export function clearSessionCookie(event: H3Event) {
 	deleteCookie(event, SESSION_COOKIE_NAME, {
+		path: "/",
+	});
+	deleteCookie(event, SESSION_INDICATOR_COOKIE, {
 		path: "/",
 	});
 }
