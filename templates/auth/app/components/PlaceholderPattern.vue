@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { useId } from "vue";
-
+// useId di-auto-import oleh Nuxt dari Vue 3.5+
 const patternId = useId();
 </script>
 

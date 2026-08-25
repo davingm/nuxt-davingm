@@ -1,23 +1,26 @@
 <script setup lang="ts">
-const mainNavItems = [ 
-    {
-        title: "Dashboard",
-        href: "/dashboard",
-        icon: "lucide:layout-grid", 
-    },
+import { BookOpen, Code2, LayoutGrid } from "@lucide/vue";
+import type { NavItem } from "./NavMain.vue";
+
+const mainNavItems: NavItem[] = [
+	{
+		title: "Dashboard",
+		href: "/dashboard",
+		icon: LayoutGrid,
+	},
 ];
 
-const footerNavItems = [
-    {
-        title: "Repository",
-        href: "https://github.com/davingm/nuxt-davingm",
-        icon: "lucide:code-2", 
-    },
-    {
-        title: "Documentation",
-        href: "https://nuxt.davingm.com",
-        icon: "lucide:book-open",
-    },
+const footerNavItems: NavItem[] = [
+	{
+		title: "Repository",
+		href: "https://github.com/davingm/nuxt-davingm",
+		icon: Code2,
+	},
+	{
+		title: "Documentation",
+		href: "https://nuxt.davingm.com",
+		icon: BookOpen,
+	},
 ];
 </script>
 

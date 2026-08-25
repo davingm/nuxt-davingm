@@ -1,10 +1,6 @@
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from "vue";
 import { Primitive } from "radix-vue";
 import { type VariantProps, cva } from "class-variance-authority";
-import Tooltip from "~/components/ui/tooltip/Tooltip.vue";
-import TooltipContent from "~/components/ui/tooltip/TooltipContent.vue";
-import TooltipTrigger from "~/components/ui/tooltip/TooltipTrigger.vue";
 import { cn } from "~/lib/utils";
 import { useSidebar } from "./utils";
 

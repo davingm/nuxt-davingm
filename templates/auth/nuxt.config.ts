@@ -18,7 +18,7 @@ export default defineNuxtConfig({
 
   icon: {
     serverBundle: {
-      collections: ['heroicons', 'simple-icons', 'lucide'],
+      collections: ['heroicons', 'simple-icons'],
     },
     // Hanya bundle icon yang benar-benar dipakai — drastis kurangi ukuran bundle
     clientBundle: {

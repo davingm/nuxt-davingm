@@ -1,0 +1,28 @@
+# AI Agent Directives & Project Guidelines (.agents)
+
+## 1. Project Overview & Architecture
+- **Framework:** Nuxt 4 (Latest Modern Standard Structure).
+- **Strict Rule:** This project is built entirely on the modern Nuxt 4 architecture. Do not assume or fall back to Nuxt 3 patterns.
+- **Directory Exploration Policy:** The project structure is standard and fixed. **Do not** perform unnecessary directory exploration or file scanning (e.g., checking tree structures or running `ls` to find paths) before creating components or features. Directly place files according to the standard Nuxt 4 layout:
+  - `app/components/` (UI primitives in `app/components/ui/`, complex components grouped by feature).
+  - `app/composables/`, `app/pages/`, `app/layouts/`, `app/middleware/`, `app/service/`, etc.
+  - `server/api/`, `server/database/`, `server/plugins/`, `server/tasks/`, `server/utils/`.
+
+## 2. Design System & UI/UX Principles
+- **Design Philosophy:** Must strictly follow the **Vercel Geist** design principles (Clean, minimalist, high contrast, typography-driven, subtle borders, professional whitespace, sophisticated dark/light balance, and highly functional).
+- **Theme Support:** Must fully support seamless **Light Mode** and **Dark Mode** via Tailwind CSS color schemes and variables.
+
+## 3. Styling Guidelines
+- **Primary Styling:** Use **Tailwind CSS** for all component and layout styling.
+- **Manual CSS Fallback:** If the user explicitly requests manual CSS styling, you **must** write it using **SCSS/SASS** (`.scss` / `.sass`), never plain CSS (`.css`).
+
+## 4. Component Organization & Modularization
+- **Modular Concept:** Separate crucial or reusable components into dedicated files.
+- **Anti-Atomic Design Over-Engineering:** Avoid micro-component breakdown (do not use strict Atomic Design methods like atom/molecule separation). Keep components functional, practical, and modular enough to maintain readability.
+- **Component Directory Structure:**
+  - Small, generic, or primitive UI components go into `app/components/ui/`.
+  - Large or feature-specific components must be grouped into dedicated folders (e.g., `app/components/auth/`, `app/components/dashboard/`, etc.).
+
+## 5. Coding & Implementation Rules
+- Write clean, type-safe (TypeScript), and scalable code adhering to Vue 3 Composition API best practices (`<script setup lang="ts">`).
+- Ensure every page (`app/pages/`) is intuitive, well-structured, and leverages the predefined component directories instantly without re-verifying the project structure.

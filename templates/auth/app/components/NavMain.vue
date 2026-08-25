@@ -1,19 +1,21 @@
 <script setup lang="ts">
+import type { Component } from "vue";
+
 export interface NavItem {
-    title: string;
-    href: string;
-    icon?: string; 
+	title: string;
+	href: string;
+	icon?: Component | Function;
 }
 
 defineProps<{
-    items: NavItem[];
+	items: NavItem[];
 }>();
 
 const route = useRoute();
 
 const isCurrentRoute = (href: string) => {
-    if (href === "/dashboard") return route.path === "/dashboard";
-    return route.path.startsWith(href);
+	if (href === "/dashboard") return route.path === "/dashboard";
+	return route.path.startsWith(href);
 };
 </script>
 
@@ -28,8 +30,7 @@ const isCurrentRoute = (href: string) => {
           :tooltip="item.title"
         >
           <NuxtLink :to="item.href">
-            <!-- Tambahkan shrink-0 -->
-              <Icon v-if="item.icon" :name="item.icon" class="size-4 shrink-0" />
+            <component :is="item.icon" v-if="item.icon" class="size-4 shrink-0" />
             <span class="text-xs font-medium">{{ item.title }}</span>
           </NuxtLink>
         </SidebarMenuButton>

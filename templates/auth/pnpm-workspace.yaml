@@ -3,3 +3,5 @@ allowBuilds:
   better-sqlite3: true
   esbuild: true
   vue-demi: true
+minimumReleaseAgeExclude:
+  - '@lucide/vue@1.34.0'

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { type HTMLAttributes } from "vue";
 import { DropdownMenuLabel, useForwardProps } from "radix-vue";
 import { cn } from "~/lib/utils";
 

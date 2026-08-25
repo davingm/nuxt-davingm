@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { type HTMLAttributes } from "vue";
 import { Primitive } from "radix-vue";
 import { cn } from "~/lib/utils";
 

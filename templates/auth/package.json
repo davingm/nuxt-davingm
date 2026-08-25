@@ -54,7 +54,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.45.2",
-    "lucide-vue-next": "^1.0.0",
+    "@lucide/vue": "^1.34.0",
     "nuxt": "^4.5.2",
     "radix-vue": "^1.9.17",
     "tailwind-merge": "^3.6.0",

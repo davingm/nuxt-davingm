@@ -13,6 +13,7 @@ useHead({
 </script>
 
 <template>
+  <LoadingBar />
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
