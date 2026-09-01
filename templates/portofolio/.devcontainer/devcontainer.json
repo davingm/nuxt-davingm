@@ -1,0 +1,18 @@
+{
+  "name": "Nuxt Production Container",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "workspaceFolder": "/app",
+  "runArgs": ["--init"],
+  "forwardPorts": [3000],
+  "remoteUser": "app",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "postCreateCommand": "pnpm install --frozen-lockfile || true",
+  "containerEnv": {
+    "NODE_ENV": "production"
+  }
+}
