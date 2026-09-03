@@ -1,0 +1,39 @@
+# Bangunkan saya sebuah Starter untuk porotfolio :
+
+> Penjelasan
+> jadi di proyek ini saya sedang membangun sebuah template cli nuxt starter jadi user mendapatkan
+sebuah template starter yang isinya banyak tools pustaka dan ui yang sudah secata default di isi di
+dalam nya , tidak hanya itu tetsting Deployment CI/CD juga sudah ada lengkap termasuk ala DevOps
+seperti Docker, Tugas kamu sekarang membuat sebuah starter portofolio untuk cli ini ,saya sudah menyiapkan folder nuxt default yang dapat anda modifikasi secara bebas asal mengikuti standar yang saya sebutkan di atas tadi 
+
+# Visual identity and branding for all
+
+ Coba buat di situs ini minimal ada beberapa halaman standar yang wajib ada, saya sudah cantumkan desian pada foto di prompt sebagai desain situs ini , jiak ada halaman yang tidak ada pada gambar mohon di buatkan dengan desian anda sendiri. untuk dna proyek ini saya harap dna nya mengikuri seperti Vitepress yang identik dapat memberikan kesan pada pengguna bawah ini adalah nuxt starter davin , dan buat tidak ai sloop full graider anda di paksa memnetukan branding dengan titik yang sama sesaui identitas prorofolio, warna typo grafi semaunya rapih
+
+ Harus ada Halaman
+
+ - index ( isi dengan about dan beberapa informasi seperti skils lengkap dengan icon nya  , pengalaman , faq, sosial , minimal 3 artikel terbaru , kutipan atau tetsimonials singkat lainya )
+ - Blog (markdown suport files Nuxt content )
+ - Gallry
+ - Proyek
+ - Teman lengkap
+
+ Fonts stanadr pakai Geist dari vercel , pewarnaa saya mau sudah support lightmode dan dark mode dan juga kalau hitam usahakan jangan hitam pekat dan jangan ada warna bitu di mode hitam (haram hukumnya ) dan ushakan warna putih bukan putih yang cerah putih yang agak soft , dan inggat dna nya saya mau persis seperi desian dna web Vitepress
+
+ # Convetional Code
+
+ saya mau anda menulis dengan format nuxt 4 standar bukan Vuejs native ( biasakan ) fiture seperti auto imports sering anda lupakan
+
+ Simpan komponen kecil ( Jika ada , jika gak ada gak usah) : di folder UI
+ Simpan Section ( jika reusable ) di folderr section
+ Simpan Layoutte di Layoute
+ Pastikan Mode Developermengt bersih tanpa ada cacat dan warning banyak bahkan error saya gak terima
+ Dan juga siapkan mode Produksi dengan Docker image dan pastikan build semuanya lancar
+ 
+ jangan lupa saya mau semuanya statistic khusus yang ini tidak ada SSR pure SSG semua , dan maximalkan nuxt
+
+
+
+ YAA INTINYA BIKIN WEB PROTOFOLIO MINIMALIS IKUT VERCEL GEIST PRINCIPLE JANGAN AI SLOOP JANGAN BANYAK KOTAK KOTAK ROUNDED  BRANDING NYA DI PIKIRAKN DIESAIN NYA DI ATUR JANGAN SERAGAM SEMUA KENGKAP LAYAKNYA PROTOFOLIO STANDAR SISANNYA PIKIR SENDIRI 
+
+ JANGAN LUPA ASSTES SEPERTI GAMBAR JUGA HARUS ADA JANGAN AI SLOOP 

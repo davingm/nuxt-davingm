@@ -1,34 +1,13 @@
 <script setup lang="ts">
+// Default layout
 </script>
 
 <template>
-  <div id="app">
+  <div class="min-h-screen flex flex-col bg-[#fafafa] dark:bg-[#121212] text-neutral-900 dark:text-neutral-100 transition-colors">
     <AppHeader />
-
-    <main class="main-content">
+    <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12">
       <slot />
     </main>
-
     <AppFooter />
   </div>
 </template>
-
-<style scoped>
-#app {
-  width: 1400px;
-  max-width: 95%;
-  margin: 0 auto;
-  border-inline: 1px solid var(--border);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  background-color: var(--bg);
-}
-
-.main-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-</style>

@@ -1,5 +1,38 @@
 {
-  "extends": ["biome:recommended"],
-  "files": ["**/*.{js,ts,jsx,tsx,vue}"],
-  "root": true
+	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"files": {
+		"ignoreUnknown": true,
+		"includes": [
+			"app/**/*.{vue,js,ts,jsx,tsx}",
+			"test/**/*.{js,ts}",
+			"*.{js,ts,mjs}"
+		],
+		"ignore": [
+			"**/.nuxt/**",
+			"**/.output/**",
+			"**/node_modules/**",
+			"**/dist/**",
+			"**/coverage/**",
+			"**/*.d.ts",
+			"**/*.min.js"
+		]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "space",
+		"indentWidth": 2,
+		"lineWidth": 100
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"correctness": {
+				"noUnusedVariables": "warn"
+			},
+			"complexity": {
+				"noBannedTypes": "off"
+			}
+		}
+	}
 }

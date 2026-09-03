@@ -1,0 +1,11 @@
+services:
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nuxt-davingm-portfolio
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    environment:
+      - NODE_ENV=production
