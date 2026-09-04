@@ -1,0 +1,32 @@
+items:
+  - role: "Lead Frontend Engineer & Creator"
+    company: "Nuxt Davingm Ecosystem"
+    location: "Remote"
+    period: "2024 — Present"
+    description: "Spearheading open-source developer tooling, starter templates, and CLI ecosystem for modern Nuxt applications."
+    achievements:
+      - "Designed high-performance SSG & SSR starters downloaded by thousands of developers worldwide."
+      - "Configured automated CI/CD DevOps workflows, Docker multi-stage builds, and Biome linting pipelines."
+      - "Authored comprehensive documentation and guides on VitePress and Nuxt 4 best practices."
+    skills: ["Nuxt 4", "Vue 3", "TypeScript", "Docker", "GitHub Actions", "Biome"]
+
+  - role: "Senior Full-Stack Developer"
+    company: "Vortex Digital Labs"
+    location: "Jakarta / Hybrid"
+    period: "2022 — 2024"
+    description: "Engineered high-concurrency web applications, microservices, and internal dashboards."
+    achievements:
+      - "Reduced client load times by 45% using hybrid SSG/ISR caching with Nitro engine."
+      - "Implemented automated integration testing suite with Vitest and Playwright."
+      - "Mentored 6 junior engineers and standardized frontend component library across 4 teams."
+    skills: ["Vue.js", "Node.js", "PostgreSQL", "Redis", "TailwindCSS", "Vitest"]
+
+  - role: "Frontend Developer"
+    company: "PixelCraft Studio"
+    location: "Bandung"
+    period: "2020 — 2022"
+    description: "Built bespoke web applications, e-commerce platforms, and interactive client portals."
+    achievements:
+      - "Delivered 20+ responsive web projects on time with 100% client satisfaction score."
+      - "Pioneered dark mode design systems and accessible ARIA compliant components."
+    skills: ["JavaScript", "Vue.js", "SCSS", "REST APIs", "Webpack/Vite"]

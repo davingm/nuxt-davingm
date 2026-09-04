@@ -1,0 +1,137 @@
+seo:
+  title: "Davin — Full-Stack Engineer & Nuxt Creator"
+  description: "Minimalist developer portfolio built with Nuxt 4, VitePress design philosophy, and Vercel Geist aesthetic."
+
+hero:
+  heading: "Building elegant web experiences & modern developer tools."
+  bio: "Hi, I'm {name} — {profileBio}"
+  cli:
+    label: "Quickstart via CLI"
+    description: "Scaffold this exact portfolio starter directly with one terminal command:"
+    command: "npx nuxt-davingm@latest init my-portfolio"
+  actions:
+    - label: "Explore Projects"
+      to: "/projects"
+      variant: "primary"
+      trailingIcon: "lucide:arrow-right"
+    - label: "Read Blog"
+      to: "/blog"
+      variant: "outline"
+    - label: "GitHub"
+      variant: "ghost"
+      icon: "simple-icons:github"
+      socialKey: "github"
+    - label: "Twitter"
+      variant: "ghost"
+      icon: "simple-icons:x"
+      socialKey: "twitter"
+    - label: "LinkedIn"
+      variant: "ghost"
+      icon: "simple-icons:linkedin"
+      socialKey: "linkedin"
+
+skills:
+  heading: "Tech Stack & Skills"
+  subheading: "Technologies and tools I use on a daily basis to build production products."
+  categories:
+    - title: "Frontend & UI"
+      icon: "lucide:layout"
+      description: "Modern reactive interfaces and minimalist design systems"
+      skills:
+        - name: "Nuxt 4"
+          icon: "simple-icons:nuxtdotjs"
+          highlight: true
+        - name: "Vue 3"
+          icon: "simple-icons:vuedotjs"
+          highlight: true
+        - name: "TypeScript"
+          icon: "simple-icons:typescript"
+          highlight: true
+        - name: "Tailwind CSS"
+          icon: "simple-icons:tailwindcss"
+        - name: "Vite"
+          icon: "simple-icons:vite"
+        - name: "HTML5/CSS3"
+          icon: "simple-icons:html5"
+    - title: "Backend & Runtime"
+      icon: "lucide:server"
+      description: "High-performance microservices and REST/GraphQL APIs"
+      skills:
+        - name: "Nitro Engine"
+          icon: "lucide:zap"
+          highlight: true
+        - name: "Node.js"
+          icon: "simple-icons:nodedotjs"
+        - name: "PostgreSQL"
+          icon: "simple-icons:postgresql"
+          highlight: true
+        - name: "Redis"
+          icon: "simple-icons:redis"
+        - name: "SQLite"
+          icon: "simple-icons:sqlite"
+        - name: "Prisma / Drizzle"
+          icon: "simple-icons:prisma"
+    - title: "DevOps & Tooling"
+      icon: "lucide:cpu"
+      description: "Automated CI/CD pipelines, containerization, and code quality"
+      skills:
+        - name: "Docker"
+          icon: "simple-icons:docker"
+          highlight: true
+        - name: "GitHub Actions"
+          icon: "simple-icons:githubactions"
+          highlight: true
+        - name: "Vitest"
+          icon: "simple-icons:vitest"
+        - name: "Biome"
+          icon: "simple-icons:biome"
+        - name: "Linux / Bash"
+          icon: "simple-icons:gnubash"
+        - name: "Vercel / Netlify"
+          icon: "simple-icons:vercel"
+
+testimonials:
+  heading: "Endorsements & Testimonials"
+  subheading: "Words from team leads and open source collaborators."
+  items:
+    - quote: "Davin's Nuxt CLI starter cuts project onboarding time by 80%. The attention to minimalism, type safety, and clean architecture is exceptional."
+      author: "Alexandre Moreau"
+      role: "Staff Frontend Architect"
+      company: "Hexa Systems"
+      avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&h=120&q=80"
+    - quote: "Working with Davin was a breeze. He translated complex microservice requirements into clean Vue 3 primitives with incredible speed and zero regressions."
+      author: "Sarah Chen"
+      role: "VP of Engineering"
+      company: "CloudVantage"
+      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80"
+
+faq:
+  heading: "Frequently Asked Questions"
+  subheading: "Common inquiries regarding technical choices, CLI tooling, and collaborations."
+  items:
+    - title: "What tech stack do you recommend for high-performance portfolio sites?"
+      content: "Nuxt 4 with static generation (SSG), TailwindCSS for utility-first styling, @nuxt/content for markdown management, and Nitro engine for zero-config prerendering. Deploying via Nginx or Vercel delivers sub-100ms global response times."
+    - title: "How is this starter template structured for the nuxt-davingm CLI?"
+      content: "This starter is built according to official Nuxt 4 conventions with the `app/` directory layout. Small UI components reside in `app/components/ui/`, reusable sections in `app/components/section/`, layouts in `app/layouts/`, and blog content in `content/`. It comes with Biome linting, Vitest tests, and Docker CI/CD."
+    - title: "Are you available for consulting or contract engineering roles?"
+      content: "Yes! I am open to select high-impact frontend architecture, Nuxt ecosystem consulting, design system implementation, and performance optimization contracts."
+    - title: "How do you ensure zero AI slop and strictly minimalist design?"
+      content: "By sticking strictly to Vercel Geist design principles: neutral charcoal dark tones (avoiding pitch black and avoiding blue tints), crisp geometric 1px borders, standard Geist typography, and using color only for intentional feedback."
+
+contact:
+  heading: "Let's build something remarkable together"
+  subheading: "Have an exciting project, open-source initiative, or architecture question? Feel free to reach out directly via email or on social platforms."
+  actions:
+    copyEmail: "Copy Email"
+    copyEmailSuccess: "Email copied!"
+    sendEmail: "Send Email"
+    dmTwitter: "DM on X"
+    github: "GitHub"
+
+latestPosts:
+  heading: "Latest Writing & Articles"
+  subheading: "Deep dives into software architecture, Nuxt ecosystems, and engineering workflows."
+  viewAll: "All articles"
+  viewAllMobile: "View all articles"
+  readPost: "Read post"
+  defaultReadTime: "5 min read"

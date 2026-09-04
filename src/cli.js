@@ -241,6 +241,8 @@ try {
       return (
         name !== 'node_modules' &&
         name !== '.nuxt' &&
+        name !== '.output' &&
+        name !== 'dist' &&
         name !== '.git'
       )
     }
