@@ -5,6 +5,7 @@ date: "2026-08-14"
 tags: ["Nuxt 4", "SSG", "Performance", "Nitro"]
 readTime: "7 min read"
 featured: true
+image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=85"
 author:
   name: "Davin"
   avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&h=200&q=80"

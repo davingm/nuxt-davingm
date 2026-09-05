@@ -10,7 +10,7 @@ import type {
 const mockProfile: UserProfile = {
 	name: "Davin",
 	handle: "@davingm",
-	role: "Full-Stack Engineer & Nuxt Creator",
+	role: "Frotend Engineer & Nuxt Creator",
 	bio: "Building minimalist web experiences.",
 	location: "Jakarta, ID (UTC+7)",
 	email: "davin@davingm.com",
@@ -24,7 +24,7 @@ const mockSite: UserSite = {
 	version: "4.0",
 	cliRepoUrl: "https://github.com/davingm/nuxt-davingm",
 	seo: {
-		title: "Davin — Full-Stack Engineer & Nuxt Creator",
+		title: "Davin — Frotend Engineer & Nuxt Creator",
 		description: "Minimalist developer portfolio built with Nuxt 4.",
 	},
 };

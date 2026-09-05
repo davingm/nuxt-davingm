@@ -2,24 +2,9 @@
 const overview = await useUserOverview();
 const { latestPosts } = overview;
 
-const { data: posts } = await useAsyncData("latest-blog-posts", async () => {
-	try {
-		if (typeof queryCollection === "function") {
-			const items = await queryCollection("blog").order("date", "DESC").limit(3).all();
-			if (items?.length > 0) {
-				return items.map((item: any) => ({
-					path: item.path || `/blog/${item.stem?.replace("blog/", "")}`,
-					title: item.title,
-					description: item.description,
-					date: item.date,
-					readTime: item.readTime || latestPosts.defaultReadTime,
-					tags: item.tags || [],
-				}));
-			}
-		}
-	} catch {}
-	return [];
-});
+const { data: posts } = await useAsyncData("latest-blog-posts", () =>
+	queryCollection("blog").order("date", "DESC").limit(3).all(),
+);
 </script>
 
 <template>
@@ -40,6 +25,10 @@ const { data: posts } = await useAsyncData("latest-blog-posts", async () => {
     </div>
 
     <div class="space-y-3">
+      <div v-if="!posts || posts.length === 0" class="py-10 text-center space-y-2">
+        <Icon name="lucide:file-text" class="w-8 h-8 mx-auto text-neutral-300 dark:text-neutral-600" />
+        <p class="text-sm text-neutral-500 dark:text-neutral-400">No articles yet — write your first post in <code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">content/blog/</code></p>
+      </div>
       <NuxtLink
         v-for="post in posts"
         :key="post.path"
@@ -53,7 +42,7 @@ const { data: posts } = await useAsyncData("latest-blog-posts", async () => {
           <div class="flex items-center gap-2 text-xs font-mono text-neutral-400 dark:text-neutral-500 shrink-0">
             <span>{{ post.date }}</span>
             <span>•</span>
-            <span>{{ post.readTime }}</span>
+            <span>{{ post.readTime || latestPosts.defaultReadTime }}</span>
           </div>
         </div>
 

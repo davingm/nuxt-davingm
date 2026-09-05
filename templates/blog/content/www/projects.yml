@@ -32,6 +32,82 @@ items:
       - "Biome sub-millisecond linting"
       - "Alpine multi-stage Docker build"
     status: "Active"
+    images:
+      - "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=85"
+      - "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=1200&q=85"
+      - "https://images.unsplash.com/photo-1593062096033-9a26b09da705?auto=format&fit=crop&w=1200&q=85"
+
+  - title: "Kestra DevOps Orchestrator"
+    description: "Automated CI/CD workflow pipeline orchestrating automated test execution, multi-architecture Docker image builds, and zero-downtime static deployment."
+    category: "CLI & DevTools"
+    tags: ["DevOps", "Docker", "GitHub Actions", "Linux", "Vitest"]
+    stars: 189
+    demoUrl: "https://demo.davingm.com/devops"
+    githubUrl: "https://github.com/davingm/devops-pipeline"
+    highlights:
+      - "GitHub Actions matrix testing"
+      - "Automated security auditing"
+      - "Lightweight Nginx production container"
+    status: "Active"
+    images:
+      - "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=1200&q=85"
+      - "https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=85"
+
+  - title: "Geist Minimalist UI Primitives"
+    description: "A pure, distraction-free Vue 3 & Nuxt 4 component library adhering to Vercel Geist design guidelines without bulky runtime dependencies."
+    category: "Libraries"
+    tags: ["Vue 3", "Nuxt 4", "Geist Font", "Accessibility"]
+    stars: 215
+    demoUrl: "https://geist-ui.davingm.com"
+    githubUrl: "https://github.com/davingm/geist-ui-vue"
+    highlights:
+      - "Fully keyboard navigable"
+      - "Zero layout shift"
+      - "Light and dark mode tailored tokens"
+    status: "Active"
+    images:
+      - "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1200&q=85"
+      - "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=1200&q=85"
+
+  - title: "DevPulse Analytics Dashboard"
+    description: "Privacy-focused web telemetry and performance analytics dashboard for indie developers and micro-SaaS founders."
+    category: "Web Apps"
+    tags: ["Nuxt 4", "PostgreSQL", "Nitro", "TailwindCSS", "Redis"]
+    stars: 94
+    demoUrl: "https://pulse.davingm.com"
+    githubUrl: "https://github.com/davingm/devpulse"
+    highlights:
+      - "Real-time SSE event streaming"
+      - "Sub-50ms query response with Redis caching"
+      - "Minimalist charts"
+    status: "Maintained"
+
+  - title: "VitePress Portfolio Theme"
+    description: "Official portfolio and documentation starter inspired by VitePress aesthetic and Vercel Geist clean typography."
+    category: "Open Source"
+    tags: ["VitePress", "Vue 3", "Markdown", "SSG"]
+    stars: 156
+    demoUrl: "https://vitepress.davingm.com"
+    githubUrl: "https://github.com/davingm/vitepress-portfolio-theme"
+    highlights:
+      - "Full markdown content support"
+      - "Dynamic table of contents"
+      - "Instant client-side transitions"
+    status: "Active"
+    images:
+      - "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=85"
+
+  - title: "Nitro Cache Adapter for Redis"
+    description: "High throughput memory caching driver for Nitro server engine with auto-invalidation and TTL compression."
+    category: "Libraries"
+    tags: ["Nitro", "Redis", "TypeScript", "Node.js"]
+    stars: 78
+    githubUrl: "https://github.com/davingm/nitro-redis-cache"
+    highlights:
+      - "Brotli payload compression"
+      - "Graceful cluster reconnects"
+      - "Zero external runtime bloat"
+    status: "Maintained"
 
   - title: "Kestra DevOps Orchestrator"
     description: "Automated CI/CD workflow pipeline orchestrating automated test execution, multi-architecture Docker image builds, and zero-downtime static deployment."

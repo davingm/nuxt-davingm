@@ -50,7 +50,7 @@ items:
   - name: "Kenji Sato"
     handle: "@kenjisato"
     avatar: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=150&h=150&q=80"
-    role: "Full-Stack Developer"
+    role: "Frotend Developer"
     bio: "Building indie micro-SaaS with Nuxt, Nitro, and SQLite. Rust explorer on weekends."
     location: "Tokyo, JP"
     siteUrl: "https://kenji.sh"

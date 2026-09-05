@@ -17,6 +17,6 @@ describe("usePortfolio (legacy title helper)", () => {
 		const { getFullTitle } = usePortfolio();
 
 		expect(getFullTitle("Projects")).toBe("Projects — Davin");
-		expect(getFullTitle()).toBe("Davin — Full-Stack Engineer & CLI Creator");
+		expect(getFullTitle()).toBe("Davin — Frotend Engineer & CLI Creator");
 	});
 });

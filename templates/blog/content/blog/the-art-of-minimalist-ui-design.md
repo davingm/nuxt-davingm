@@ -5,6 +5,7 @@ date: "2026-07-10"
 tags: ["Design", "Geist", "CSS", "VitePress"]
 readTime: "4 min read"
 featured: false
+image: "https://images.unsplash.com/photo-1593062096033-9a26b09da705?auto=format&fit=crop&w=1200&q=85"
 author:
   name: "Davin"
   avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&h=200&q=80"

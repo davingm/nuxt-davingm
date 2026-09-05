@@ -5,6 +5,7 @@ date: "2026-08-20"
 tags: ["Nuxt", "CLI", "Architecture", "TypeScript"]
 readTime: "5 min read"
 featured: true
+image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=85"
 author:
   name: "Davin"
   avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&h=200&q=80"

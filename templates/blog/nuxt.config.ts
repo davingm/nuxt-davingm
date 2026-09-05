@@ -2,44 +2,60 @@
 // https://nuxt.davingm.com/docs/api/configuration/nuxt-config > For Starter
 
 export default defineNuxtConfig({
-	compatibilityDate: "2025-07-15",
-	ssr: true,
+				compatibilityDate: "2025-07-15",
+				ssr: true,
 
-	modules: ["@nuxt/icon", "@nuxtjs/color-mode", "@nuxt/content"],
+				modules: ["@nuxt/icon", "@nuxtjs/color-mode", "@nuxt/content"],
 
-	colorMode: {
-		classSuffix: "",
-		preference: "system",
-		fallback: "dark",
-	},
+				colorMode: {
+								classSuffix: "",
+								preference: "system",
+								fallback: "dark",
+				},
 
-	content: {
-		// Nuxt Content config
-	},
+				content: {
+								// Nuxt Content config
+				},
 
-	nitro: {
-		prerender: {
-			crawlLinks: true,
-			routes: ["/"],
-		},
-	},
+				vite: {
+								optimizeDeps: {
+												exclude: [
+																"remark-gfm",
+																"remark-emoji",
+																"remark-mdc",
+																"remark-rehype",
+																"rehype-raw",
+																"parse5",
+																"unified",
+																"debug",
+																"extend",
+												],
+								},
+				},
 
-	css: ["~/assets/css/tailwind.css"],
+				nitro: {
+								prerender: {
+												crawlLinks: true,
+												routes: ["/"],
+								},
+				},
 
-	postcss: {
-		plugins: {
-			tailwindcss: {},
-			autoprefixer: {},
-		},
-	},
+				css: ["~/assets/css/tailwind.css"],
 
-	devtools: {
-		enabled: false,
-	},
+				postcss: {
+								plugins: {
+												tailwindcss: {},
+												autoprefixer: {},
+								},
+				},
 
-	runtimeConfig: {
-		public: {
-			apiBase: "",
-		},
-	},
+				devtools: {
+								enabled: true,
+				},
+
+				runtimeConfig: {
+								public: {
+												apiBase: "",
+								},
+				},
 });

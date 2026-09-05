@@ -5,6 +5,7 @@ date: "2026-07-28"
 tags: ["DevOps", "Docker", "CI/CD", "GitHub Actions"]
 readTime: "6 min read"
 featured: true
+image: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=1200&q=85"
 author:
   name: "Davin"
   avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&h=200&q=80"

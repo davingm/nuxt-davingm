@@ -62,51 +62,68 @@ const filteredProjects = computed(() => {
       </div>
     </div>
 
-    <div v-if="filteredProjects.length === 0" class="py-16 text-center text-sm text-neutral-500">
+    <div v-if="filteredProjects.length === 0 && (data.items ?? []).length === 0" class="py-20 text-center space-y-3">
+      <Icon name="lucide:folder-open" class="w-10 h-10 mx-auto text-neutral-300 dark:text-neutral-600" />
+      <p class="text-base font-medium text-neutral-900 dark:text-neutral-100">No projects yet</p>
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+        Add your first project in <code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">content/www/projects.yml</code>
+      </p>
+    </div>
+
+    <div v-else-if="filteredProjects.length === 0" class="py-16 text-center text-sm text-neutral-500">
       {{ data.emptyState }}
     </div>
 
     <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <UiCard v-for="project in filteredProjects" :key="project.title" padding="md" class="flex flex-col justify-between group space-y-4">
-        <div class="space-y-3">
-          <div class="flex items-center justify-between gap-2">
-            <div class="flex items-center gap-2">
-              <UiBadge variant="subtle" size="sm">{{ project.category }}</UiBadge>
-              <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500" />
+      <UiCard v-for="project in filteredProjects" :key="project.title" padding="none" class="flex flex-col justify-between group overflow-hidden">
+        <!-- Image carousel (if images provided) -->
+        <UiImageCarousel
+          v-if="project.images && project.images.length > 0"
+          :images="project.images"
+          :alt="project.title"
+        />
+
+        <div class="p-5 sm:p-6 space-y-4 flex flex-col flex-1">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <UiBadge variant="subtle" size="sm">{{ project.category }}</UiBadge>
+                <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              </div>
+              <div v-if="project.stars" class="flex items-center gap-1 text-xs font-mono text-neutral-500 dark:text-neutral-400">
+                <Icon name="lucide:star" class="w-3 h-3 text-amber-500 fill-amber-500" />
+                <span>{{ project.stars }}</span>
+              </div>
             </div>
-            <div v-if="project.stars" class="flex items-center gap-1 text-xs font-mono text-neutral-500 dark:text-neutral-400">
-              <Icon name="lucide:star" class="w-3 h-3 text-amber-500 fill-amber-500" />
-              <span>{{ project.stars }}</span>
+
+            <div>
+              <h2 class="text-base font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors">
+                {{ project.title }}
+              </h2>
+              <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-2 leading-relaxed">
+                {{ project.description }}
+              </p>
             </div>
+
+            <ul class="space-y-1 text-xs text-neutral-500 dark:text-neutral-400 list-disc list-inside">
+              <li v-for="(h, hIdx) in project.highlights" :key="hIdx">{{ h }}</li>
+            </ul>
           </div>
 
-          <div>
-            <h2 class="text-base font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors">
-              {{ project.title }}
-            </h2>
-            <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-2 leading-relaxed">
-              {{ project.description }}
-            </p>
-          </div>
-
-          <ul class="space-y-1 text-xs text-neutral-500 dark:text-neutral-400 list-disc list-inside">
-            <li v-for="(h, hIdx) in project.highlights" :key="hIdx">{{ h }}</li>
-          </ul>
-        </div>
-
-        <div class="pt-4 border-t border-neutral-100 dark:border-neutral-800/80 space-y-3">
-          <div class="flex flex-wrap gap-1">
-            <span v-for="tag in project.tags" :key="tag" class="text-[10px] font-mono px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300">
-              {{ tag }}
-            </span>
-          </div>
-          <div class="flex items-center gap-2 pt-1">
-            <UiButton v-if="project.demoUrl" :href="project.demoUrl" variant="outline" size="sm" trailing-icon="lucide:external-link" class="flex-1 text-xs">
-              {{ data.actions.liveDemo }}
-            </UiButton>
-            <UiButton v-if="project.githubUrl" :href="project.githubUrl" variant="ghost" size="sm" icon="simple-icons:github" class="text-xs">
-              {{ data.actions.source }}
-            </UiButton>
+          <div class="pt-4 border-t border-neutral-100 dark:border-neutral-800/80 space-y-3 mt-auto">
+            <div class="flex flex-wrap gap-1">
+              <span v-for="tag in project.tags" :key="tag" class="text-[10px] font-mono px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300">
+                {{ tag }}
+              </span>
+            </div>
+            <div class="flex items-center gap-2 pt-1">
+              <UiButton v-if="project.demoUrl" :href="project.demoUrl" variant="outline" size="sm" trailing-icon="lucide:external-link" class="flex-1 text-xs">
+                {{ data.actions.liveDemo }}
+              </UiButton>
+              <UiButton v-if="project.githubUrl" :href="project.githubUrl" variant="ghost" size="sm" icon="simple-icons:github" class="text-xs">
+                {{ data.actions.source }}
+              </UiButton>
+            </div>
           </div>
         </div>
       </UiCard>

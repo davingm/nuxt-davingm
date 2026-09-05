@@ -1,39 +1,52 @@
-# Bangunkan saya sebuah Starter untuk porotfolio :
-
-> Penjelasan
-> jadi di proyek ini saya sedang membangun sebuah template cli nuxt starter jadi user mendapatkan
-sebuah template starter yang isinya banyak tools pustaka dan ui yang sudah secata default di isi di
-dalam nya , tidak hanya itu tetsting Deployment CI/CD juga sudah ada lengkap termasuk ala DevOps
-seperti Docker, Tugas kamu sekarang membuat sebuah starter portofolio untuk cli ini ,saya sudah menyiapkan folder nuxt default yang dapat anda modifikasi secara bebas asal mengikuti standar yang saya sebutkan di atas tadi 
-
-# Visual identity and branding for all
-
- Coba buat di situs ini minimal ada beberapa halaman standar yang wajib ada, saya sudah cantumkan desian pada foto di prompt sebagai desain situs ini , jiak ada halaman yang tidak ada pada gambar mohon di buatkan dengan desian anda sendiri. untuk dna proyek ini saya harap dna nya mengikuri seperti Vitepress yang identik dapat memberikan kesan pada pengguna bawah ini adalah nuxt starter davin , dan buat tidak ai sloop full graider anda di paksa memnetukan branding dengan titik yang sama sesaui identitas prorofolio, warna typo grafi semaunya rapih
-
- Harus ada Halaman
-
- - index ( isi dengan about dan beberapa informasi seperti skils lengkap dengan icon nya  , pengalaman , faq, sosial , minimal 3 artikel terbaru , kutipan atau tetsimonials singkat lainya )
- - Blog (markdown suport files Nuxt content )
- - Gallry
- - Proyek
- - Teman lengkap
-
- Fonts stanadr pakai Geist dari vercel , pewarnaa saya mau sudah support lightmode dan dark mode dan juga kalau hitam usahakan jangan hitam pekat dan jangan ada warna bitu di mode hitam (haram hukumnya ) dan ushakan warna putih bukan putih yang cerah putih yang agak soft , dan inggat dna nya saya mau persis seperi desian dna web Vitepress
-
- # Convetional Code
-
- saya mau anda menulis dengan format nuxt 4 standar bukan Vuejs native ( biasakan ) fiture seperti auto imports sering anda lupakan
-
- Simpan komponen kecil ( Jika ada , jika gak ada gak usah) : di folder UI
- Simpan Section ( jika reusable ) di folderr section
- Simpan Layoutte di Layoute
- Pastikan Mode Developermengt bersih tanpa ada cacat dan warning banyak bahkan error saya gak terima
- Dan juga siapkan mode Produksi dengan Docker image dan pastikan build semuanya lancar
- 
- jangan lupa saya mau semuanya statistic khusus yang ini tidak ada SSR pure SSG semua , dan maximalkan nuxt
 
 
+# Buat Framroks ini se statistic mungkin
 
- YAA INTINYA BIKIN WEB PROTOFOLIO MINIMALIS IKUT VERCEL GEIST PRINCIPLE JANGAN AI SLOOP JANGAN BANYAK KOTAK KOTAK ROUNDED  BRANDING NYA DI PIKIRAKN DIESAIN NYA DI ATUR JANGAN SERAGAM SEMUA KENGKAP LAYAKNYA PROTOFOLIO STANDAR SISANNYA PIKIR SENDIRI 
+anda mungkin sudah melihat bagai mana File makrdonw ini di rendere
+tapi belum pintar saat ini markdown navigasi halaman dan lainya itu di catat
+statis manual satu per satu judul di index.vue seperrti ini 
 
- JANGAN LUPA ASSTES SEPERTI GAMBAR JUGA HARUS ADA JANGAN AI SLOOP 
+```vue
+const staticArticles = [
+	{
+		path: "/blog/building-modern-cli-templates",
+		title: "Architecting Developer-First Nuxt Starter Templates",
+		description:
+			"How to build modular, production-ready Nuxt 4 templates with VitePress design principles and built-in DevOps.",
+		date: "Aug 20, 2026",
+		readTime: "5 min read",
+		tags: ["Nuxt", "CLI", "Architecture", "TypeScript"],
+	},
+]
+``
+
+
+saya tidak suka seharunya pengembang hanya perlu membuat file markdown dan mengisi data data
+yml di dalam markdown tersebut nama file markdown = nama halamna tidak usah melakukan pathing manual yang
+repo dan lama apalagi manual 
+
+dan juga berikan validasi jika blog kosong maka tampilkan tidak ada blog dan tulis blog pertama mungkin
+dan ini baru blog yang ketauan , [[ Tujuan utama kita aadalah membaut situs protofolio + blog yang mudah dan enak di pakai secara Dx Dan UX bukan hanya UI ]]
+
+# Tambahkan Foto Profile rounded di halaman utama {overview}
+
+tambahkan foto profile ukuranya agak besar gak beseran dan kekecilan di halaman utama pastikan tampilanya masih rapih
+atur atur aja layoute nya layatak nya situs pribadi yang di bangun untuk satu orang bukan pres 
+
+# Buat Project dan Blog  dapat memiliki Gambar
+
+saya mau di project dan blog user dapat memiliki gambar pada proyek mereka , gambar yang di masukan bisa banyak gambar dalam 1 proyek dan 
+melakuakn scoll kiri kanan sepetti web eccomerce untuk meliha sorotan gambar ss yang ada pada proyek, hanya saja di blog hanya ada 1 gambar dan gambar itu juga support seo 
+saya mau ketika url proyek di tampilakn di wa dan media sosial lainya itu di tampilakan di sana. kamu pasti paham
+tambahkan validasi yang sama seperti blog jika project di set 0 sama sekali tapi set juga gak semua proyek harus memilik gambar, dan juga 
+meski ini menggunakan gambar jangan di kompres atau mengguanakn image optamzion makan limit soalnya 
+
+# Perlengkap serach saya mau serach lebih lengakap seeprti di tampilan algolioa 
+
+saya mau modal serach lebih lebar lebih panjang tidak semperi dan kaku seperti ini dan juga serach usahakan di buat lebih hemat
+mandwith yaa cari alternative, atau apapun itu lah
+
+
+#
+
+

@@ -18,6 +18,10 @@ useSeoMeta({
 	),
 	ogTitle: computed(() => page.value?.title),
 	ogDescription: computed(() => page.value?.description),
+	ogType: "article",
+	ogImage: computed(() => page.value?.image || undefined),
+	twitterCard: computed(() => page.value?.image ? "summary_large_image" : "summary"),
+	twitterImage: computed(() => page.value?.image || undefined),
 });
 
 const shareUrl = computed(() => {
@@ -43,6 +47,16 @@ const shareUrl = computed(() => {
 
     <!-- Article Header -->
     <header class="space-y-4 pb-6 border-b border-neutral-200 dark:border-neutral-800">
+      <!-- Cover image -->
+      <div v-if="page?.image" class="w-full rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-800 -mx-0">
+        <img
+          :src="page.image"
+          :alt="page.title"
+          class="w-full h-56 sm:h-72 object-cover"
+          loading="eager"
+        />
+      </div>
+
       <!-- Tag Pills -->
       <div v-if="page?.tags && page.tags.length" class="flex flex-wrap gap-1.5">
         <UiBadge

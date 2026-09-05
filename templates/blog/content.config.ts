@@ -209,6 +209,7 @@ export default defineContentConfig({
 						githubUrl: z.string().optional(),
 						highlights: z.array(z.string()),
 						status: z.enum(["Active", "Maintained", "Beta"]),
+						images: z.array(z.string()).optional(),
 					}),
 				),
 			}),

@@ -2,82 +2,25 @@
 useSeoMeta({
 	title: "Blog & Technical Articles — Davin",
 	description:
-		"Articles on Nuxt 4, full-stack architecture, DevOps automation, and minimalist design systems.",
+		"Articles on Nuxt 4, Frotend architecture, DevOps automation, and minimalist design systems.",
 });
 
-const staticArticles = [
-	{
-		path: "/blog/building-modern-cli-templates",
-		title: "Architecting Developer-First Nuxt Starter Templates",
-		description:
-			"How to build modular, production-ready Nuxt 4 templates with VitePress design principles and built-in DevOps.",
-		date: "Aug 20, 2026",
-		readTime: "5 min read",
-		tags: ["Nuxt", "CLI", "Architecture", "TypeScript"],
-	},
-	{
-		path: "/blog/mastering-nuxt-4-and-ssg",
-		title: "Deep Dive into Nuxt 4 Architecture and Zero-Config SSG",
-		description:
-			"Optimizing static generation with Nitro engine, prerendering pipelines, and modern composable architecture.",
-		date: "Aug 14, 2026",
-		readTime: "7 min read",
-		tags: ["Nuxt 4", "SSG", "Performance", "Nitro"],
-	},
-	{
-		path: "/blog/streamlining-devops-with-docker-and-actions",
-		title: "Minimalist Docker & CI/CD Pipelines for Modern Web Apps",
-		description:
-			"Achieving ultra-fast builds and bulletproof reliability with GitHub Actions, Vitest, and lightweight Nginx containers.",
-		date: "Jul 28, 2026",
-		readTime: "6 min read",
-		tags: ["DevOps", "Docker", "CI/CD", "GitHub Actions"],
-	},
-	{
-		path: "/blog/the-art-of-minimalist-ui-design",
-		title:
-			"Geist Principles: Crafting Clean, Distraction-Free Developer Portfolios",
-		description:
-			"Why less is more: using intentional typography, crisp borders, and dark mode restraint to let your work shine.",
-		date: "Jul 10, 2026",
-		readTime: "4 min read",
-		tags: ["Design", "Geist", "CSS", "VitePress"],
-	},
-];
-
-const { data: articles } = await useAsyncData("all-blog-articles", async () => {
-	try {
-		if (typeof queryCollection === "function") {
-			const items = await queryCollection("blog").order("date", "DESC").all();
-			if (items && items.length > 0) {
-				return items.map((item: any) => ({
-					path: item.path || `/blog/${item.stem?.replace("blog/", "")}`,
-					title: item.title,
-					description: item.description,
-					date: item.date,
-					readTime: item.readTime || "5 min read",
-					tags: item.tags || [],
-				}));
-			}
-		}
-	} catch (e) {
-		// fallback
-	}
-	return staticArticles;
-});
+const { data: articles } = await useAsyncData("all-blog-articles", () =>
+	queryCollection("blog").order("date", "DESC").all(),
+);
 
 const activeTag = ref<string>("All");
 const searchQuery = ref("");
 
 const allTags = computed(() => {
-	const list = articles.value || staticArticles;
+	const list = articles.value ?? [];
 	const set = new Set<string>();
 	list.forEach((a) => a.tags?.forEach((t: string) => set.add(t)));
 	return ["All", ...Array.from(set)];
 });
 
 const filteredArticles = computed(() => {
-	const list = articles.value || staticArticles;
+	const list = articles.value ?? [];
 	return list.filter((article) => {
 		const matchesTag =
 			activeTag.value === "All" || article.tags?.includes(activeTag.value);
@@ -90,6 +33,8 @@ const filteredArticles = computed(() => {
 		return matchesTag && matchesSearch;
 	});
 });
+
+const isEmpty = computed(() => (articles.value ?? []).length === 0);
 </script>
 
 <template>
@@ -105,7 +50,7 @@ const filteredArticles = computed(() => {
     </div>
 
     <!-- Filter Bar -->
-    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pb-2 border-b border-neutral-200 dark:border-neutral-800">
+    <div v-if="!isEmpty" class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pb-2 border-b border-neutral-200 dark:border-neutral-800">
       <!-- Tag Pills -->
       <div class="flex flex-wrap items-center gap-1.5">
         <button
@@ -137,7 +82,15 @@ const filteredArticles = computed(() => {
     </div>
 
     <!-- Articles List -->
-    <div v-if="filteredArticles.length === 0" class="py-16 text-center text-sm text-neutral-500">
+    <div v-if="isEmpty" class="py-20 text-center space-y-3">
+      <Icon name="lucide:file-text" class="w-10 h-10 mx-auto text-neutral-300 dark:text-neutral-600" />
+      <p class="text-base font-medium text-neutral-900 dark:text-neutral-100">No articles yet</p>
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+        Create your first post in <code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">content/blog/</code>
+      </p>
+    </div>
+
+    <div v-else-if="filteredArticles.length === 0" class="py-16 text-center text-sm text-neutral-500">
       No articles found matching your criteria.
     </div>
 
@@ -146,38 +99,50 @@ const filteredArticles = computed(() => {
         v-for="article in filteredArticles"
         :key="article.path"
         :to="article.path"
-        class="group block p-5 sm:p-6 rounded-lg border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#181818] hover:border-neutral-300 dark:hover:border-neutral-700 transition-all duration-150 shadow-xs"
+        class="group block rounded-lg border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#181818] hover:border-neutral-300 dark:hover:border-neutral-700 transition-all duration-150 shadow-xs overflow-hidden"
       >
-        <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-2">
-          <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors">
-            {{ article.title }}
-          </h2>
-          <div class="flex items-center gap-2 text-xs font-mono text-neutral-400 dark:text-neutral-500 shrink-0">
-            <span>{{ article.date }}</span>
-            <span>•</span>
-            <span>{{ article.readTime }}</span>
-          </div>
+        <!-- Cover image -->
+        <div v-if="article.image" class="w-full h-44 sm:h-52 overflow-hidden bg-neutral-100 dark:bg-neutral-800">
+          <img
+            :src="article.image"
+            :alt="article.title"
+            class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+            loading="lazy"
+          />
         </div>
 
-        <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 line-clamp-2 leading-relaxed">
-          {{ article.description }}
-        </p>
-
-        <div class="flex items-center justify-between pt-4 mt-4 border-t border-neutral-100 dark:border-neutral-800/60 text-xs">
-          <div class="flex flex-wrap gap-1.5">
-            <span
-              v-for="tag in article.tags"
-              :key="tag"
-              class="text-[10px] font-mono px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400"
-            >
-              #{{ tag }}
-            </span>
+        <div class="p-5 sm:p-6">
+          <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-2">
+            <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors">
+              {{ article.title }}
+            </h2>
+            <div class="flex items-center gap-2 text-xs font-mono text-neutral-400 dark:text-neutral-500 shrink-0">
+              <span>{{ article.date }}</span>
+              <span>•</span>
+              <span>{{ article.readTime || '5 min read' }}</span>
+            </div>
           </div>
 
-          <span class="inline-flex items-center gap-1 font-medium text-neutral-800 dark:text-neutral-200 group-hover:translate-x-0.5 transition-transform text-xs">
-            <span>Read full article</span>
-            <Icon name="lucide:arrow-right" class="w-3.5 h-3.5" />
-          </span>
+          <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 line-clamp-2 leading-relaxed">
+            {{ article.description }}
+          </p>
+
+          <div class="flex items-center justify-between pt-4 mt-4 border-t border-neutral-100 dark:border-neutral-800/60 text-xs">
+            <div class="flex flex-wrap gap-1.5">
+              <span
+                v-for="tag in article.tags"
+                :key="tag"
+                class="text-[10px] font-mono px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400"
+              >
+                #{{ tag }}
+              </span>
+            </div>
+
+            <span class="inline-flex items-center gap-1 font-medium text-neutral-800 dark:text-neutral-200 group-hover:translate-x-0.5 transition-transform text-xs">
+              <span>Read full article</span>
+              <Icon name="lucide:arrow-right" class="w-3.5 h-3.5" />
+            </span>
+          </div>
         </div>
       </NuxtLink>
     </div>
