@@ -55,6 +55,17 @@ watch(() => route.fullPath, () => { mobileMenuOpen.value = false; });
         >
           <Icon name="simple-icons:github" class="w-4 h-4" />
         </a>
+        <!-- Travellings 开往 webring button -->
+        <a
+          href="https://www.travellings.cn/go"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="p-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-md transition-colors hidden sm:inline-flex items-center justify-center"
+          aria-label="开往 Travellings"
+          title="开往 Travellings"
+        >
+          <Icon name="lucide:tram-front" class="w-4 h-4" />
+        </a>
         <UiThemeToggle />
         <button
           type="button"

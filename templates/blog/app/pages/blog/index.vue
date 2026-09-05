@@ -2,7 +2,7 @@
 useSeoMeta({
 	title: "Blog & Technical Articles — Davin",
 	description:
-		"Articles on Nuxt 4, Frotend architecture, DevOps automation, and minimalist design systems.",
+		"Articles on Nuxt 4, Frontend architecture, DevOps automation, and minimalist design systems.",
 });
 
 const { data: articles } = await useAsyncData("all-blog-articles", () =>

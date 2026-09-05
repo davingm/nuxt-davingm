@@ -27,62 +27,12 @@ prTemplate: |
   - Tags: ["Tag1", "Tag2", "Tag3"]
 
 items:
-  - name: "Ahmad Fauzi"
-    handle: "@ahmadfauzi"
-    avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80"
+  - name: "Nafis"
+    handle: "@Tokitakun"
+    avatar: "https://github.com/Tokitakun.png"
     role: "Cloud Architect & SRE"
     bio: "Kubernetes specialist, Go enthusiast, and author of automated observability runbooks."
-    location: "Bandung, ID"
-    siteUrl: "https://fauzi.dev"
-    githubUrl: "https://github.com/fauzi"
+    location: "Shenzhen, China"
+    siteUrl: "https://tokita.nlfts.dev"
+    githubUrl: "https://github.com/Tokitakun"
     tags: ["Kubernetes", "Go", "GCP", "Terraform"]
-
-  - name: "Elena Rostova"
-    handle: "@elena_dev"
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80"
-    role: "Staff Frontend Engineer"
-    bio: "Vue.js core contributor and accessibility advocate. Passionate about micro-interactions."
-    location: "Berlin, DE"
-    siteUrl: "https://elena.codes"
-    githubUrl: "https://github.com/elena"
-    tags: ["Vue 3", "TypeScript", "A11y", "Tailwind"]
-
-  - name: "Kenji Sato"
-    handle: "@kenjisato"
-    avatar: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=150&h=150&q=80"
-    role: "Frotend Developer"
-    bio: "Building indie micro-SaaS with Nuxt, Nitro, and SQLite. Rust explorer on weekends."
-    location: "Tokyo, JP"
-    siteUrl: "https://kenji.sh"
-    githubUrl: "https://github.com/kenji"
-    tags: ["Nuxt 4", "Rust", "SQLite", "Nitro"]
-
-  - name: "Rian Pratama"
-    handle: "@rianpratama"
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80"
-    role: "DevOps & Tooling Engineer"
-    bio: "Specialist in developer experience, CI/CD speed optimization, and Docker orchestration."
-    location: "Jakarta, ID"
-    siteUrl: "https://rian.dev"
-    githubUrl: "https://github.com/rian"
-    tags: ["Docker", "Actions", "Linux", "Biome"]
-
-  - name: "Chloe Tremblay"
-    handle: "@chloe_ux"
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80"
-    role: "Design Systems Lead"
-    bio: "Bridging design and engineering with Figma tokens, Geist typography, and Tailwind."
-    location: "Montreal, CA"
-    siteUrl: "https://chloe.design"
-    githubUrl: "https://github.com/chloe"
-    tags: ["Design Systems", "Figma", "Geist", "CSS"]
-
-  - name: "Budi Santoso"
-    handle: "@budisantoso"
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80"
-    role: "Backend & Distributed Systems"
-    bio: "Distributed caching, PostgreSQL tuning, and event-driven architecture with Apache Kafka."
-    location: "Surabaya, ID"
-    siteUrl: "https://budi.id"
-    githubUrl: "https://github.com/budi"
-    tags: ["PostgreSQL", "Redis", "Kafka", "Go"]

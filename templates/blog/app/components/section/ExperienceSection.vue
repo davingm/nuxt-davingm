@@ -14,21 +14,29 @@ const experiences = await useUserExperience();
     </div>
 
     <div class="space-y-4">
-      <UiCard v-for="(exp, idx) in experiences" :key="idx" padding="md" class="space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-          <div>
-            <h3 class="text-base font-semibold text-neutral-900 dark:text-neutral-100">
-              {{ exp.role }}
-            </h3>
-            <div class="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 font-medium">
-              <span class="text-neutral-800 dark:text-neutral-200">{{ exp.company }}</span>
-              <span>•</span>
-              <span>{{ exp.location }}</span>
-            </div>
-          </div>
-          <UiBadge variant="subtle" size="sm" class="self-start sm:self-center">
+      <UiCard v-for="(exp, idx) in experiences" :key="idx" padding="md" class="relative space-y-4">
+
+        <!-- Logo: absolute, tidak mempengaruhi flow konten -->
+        <img
+          v-if="exp.logo"
+          :src="exp.logo"
+          :alt="exp.company"
+          class="absolute top-4 right-4 w-20 h-20 rounded-2xl object-cover border border-neutral-200 dark:border-neutral-700 opacity-90"
+        />
+
+        <!-- Header: pr-24 supaya teks tidak nabrak logo -->
+        <div class="pr-24">
+          <UiBadge variant="subtle" size="sm" class="mb-2">
             {{ exp.period }}
           </UiBadge>
+          <h3 class="text-base font-semibold text-neutral-900 dark:text-neutral-100">
+            {{ exp.role }}
+          </h3>
+          <div class="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 font-medium mt-0.5">
+            <span class="text-neutral-800 dark:text-neutral-200">{{ exp.company }}</span>
+            <span>•</span>
+            <span>{{ exp.location }}</span>
+          </div>
         </div>
 
         <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">

@@ -1,0 +1,16 @@
+---
+title: ""
+description: "."
+date: "xxxx-xx-xx"
+tags: ["", ""] # multipel tags 
+readTime: "xx min read"
+featured: true
+image: "/images.png"
+author:
+  name: ""
+  avatar: ""
+  role: ""
+---
+
+
+<!--  Write your first blog post here using Markdown format, and rename this file from `.dir` to `.md` to display it on the `/blog` page; refer to the documentation at https://nuxt.davingm.com/templates/blog/create-blog.html for more information. -->

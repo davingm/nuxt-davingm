@@ -179,6 +179,7 @@ export default defineContentConfig({
 						company: z.string(),
 						location: z.string(),
 						period: z.string(),
+						logo: z.string().optional(),
 						description: z.string(),
 						achievements: z.array(z.string()),
 						skills: z.array(z.string()),

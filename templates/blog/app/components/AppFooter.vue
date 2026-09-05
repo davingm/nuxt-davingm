@@ -35,6 +35,22 @@ const [profile, site] = await Promise.all([useUserProfile(), useUserSite()]);
             <Icon name="lucide:arrow-up-right" class="w-3 h-3" />
           </a>
         </template>
+
+        <!-- Travellings 开往 badge -->
+        <a
+          href="https://www.travellings.cn/go"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="开往 Travellings"
+          title="开往 Travellings"
+        >
+          <img
+            src="https://www.travellings.cn/assets/logo.gif"
+            alt="开往 Travellings"
+            class="h-5 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity"
+            loading="lazy"
+          />
+        </a>
       </div>
     </div>
   </footer>

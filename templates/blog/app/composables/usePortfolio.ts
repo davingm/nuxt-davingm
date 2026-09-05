@@ -15,7 +15,7 @@ export const usePortfolio = () => {
 	const config = ref<PortfolioConfig>({
 		name: "Davin",
 		handle: "@davingm",
-		role: "Frotend Engineer & CLI Creator",
+		role: "Frontend Engineer & CLI Creator",
 		bio: "Building minimalist web experiences, Nuxt tooling, and automated DevOps workflows.",
 		email: "davin@davingm.com",
 		location: "Jakarta, ID (UTC+7)",

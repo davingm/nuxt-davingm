@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const data = await useUserProjects();
-const { items: projects } = data;
+const projects = computed(() => data.items ?? []);
 </script>
 
 <template>
@@ -14,14 +14,24 @@ const { items: projects } = data;
           {{ data.subheading }}
         </p>
       </div>
-      <NuxtLink to="/projects" class="hidden sm:inline-flex items-center gap-1 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
+      <NuxtLink v-if="projects.length > 0" to="/projects" class="hidden sm:inline-flex items-center gap-1 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
         <span>View all</span>
         <Icon name="lucide:arrow-right" class="w-3.5 h-3.5" />
       </NuxtLink>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <UiCard v-for="project in projects?.slice(0, 3)" :key="project.title" padding="md" class="flex flex-col justify-between group">
+    <!-- Empty state -->
+    <div v-if="projects.length === 0" class="py-14 flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed border-neutral-200 dark:border-neutral-800">
+      <Icon name="lucide:folder-open" class="w-9 h-9 text-neutral-300 dark:text-neutral-600" />
+      <p class="text-sm font-medium text-neutral-900 dark:text-neutral-100">No projects yet</p>
+      <p class="text-xs text-neutral-500 dark:text-neutral-400">
+        Add your first project in
+        <code class="font-mono px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800">content/www/projects.yml</code>
+      </p>
+    </div>
+
+    <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <UiCard v-for="project in projects.slice(0, 3)" :key="project.title" padding="md" class="flex flex-col justify-between group">
         <div class="space-y-3">
           <div class="flex items-center justify-between gap-2">
             <UiBadge :variant="project.status === 'Open Source' ? 'brand' : 'subtle'" size="sm">
@@ -58,7 +68,7 @@ const { items: projects } = data;
       </UiCard>
     </div>
 
-    <div class="sm:hidden pt-2 text-center">
+    <div v-if="projects.length > 0" class="sm:hidden pt-2 text-center">
       <NuxtLink to="/projects" class="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100">
         <span>View all projects</span>
         <Icon name="lucide:arrow-right" class="w-3.5 h-3.5" />

@@ -95,15 +95,15 @@ testimonials:
   subheading: "Words from team leads and open source collaborators."
   items:
     - quote: "Davin's Nuxt CLI starter cuts project onboarding time by 80%. The attention to minimalism, type safety, and clean architecture is exceptional."
-      author: "Alexandre Moreau"
-      role: "Staff Frontend Architect"
-      company: "Hexa Systems"
-      avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&h=120&q=80"
+      author: "Radiedtya"
+      role: "CTO"
+      company: "Parataryn"
+      avatar: "https://github.com/Radiedtya.png"
     - quote: "Working with Davin was a breeze. He translated complex microservice requirements into clean Vue 3 primitives with incredible speed and zero regressions."
-      author: "Sarah Chen"
+      author: "Nairha Chan"
       role: "VP of Engineering"
-      company: "CloudVantage"
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80"
+      company: "NLFTs ltd"
+      avatar: "https://github.com/nairha.png"
 
 faq:
   heading: "Frequently Asked Questions"
